@@ -1,0 +1,66 @@
+---
+interface Props {
+  repo:        string;
+  title:       string;
+  description: string;
+  stack:       string[];
+  featured?:   boolean;
+  href?:       string;
+}
+const { repo, title, description, stack, featured = false, href = '#' } = Astro.props;
+---
+
+<a class:list={['p', { feat: featured }]} href={href} target="_blank" rel="noopener">
+  <div class="repo">{repo}</div>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  <div class="stack">
+    {stack.map(tag => <span>{tag}</span>)}
+  </div>
+</a>
+
+<style>
+  .p {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 24px;
+    grid-column: span 3;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .p:hover { border-color: var(--navy); transform: translateY(-2px); }
+  .p.feat  { grid-column: span 6; background: var(--paper-2); }
+  .repo {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--muted);
+    letter-spacing: -0.005em;
+  }
+  h3 {
+    font-size: 19px;
+    font-weight: 500;
+    font-family: var(--serif);
+    letter-spacing: -0.015em;
+  }
+  p { color: var(--muted); font-size: 14px; margin: 0; }
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .stack span {
+    font-size: 11px;
+    background: var(--code);
+    color: var(--ink);
+    padding: 3px 9px;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+  @media (max-width: 780px) {
+    .p, .p.feat { grid-column: span 6; }
+  }
+</style>

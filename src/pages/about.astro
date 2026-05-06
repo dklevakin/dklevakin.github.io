@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About — Dmytro Klevakin"
+  description="Architect by day, automator by evening, live-coder by night. 12+ years in cloud, DevOps and architecture at SoftServe."
+>
+  <section class="page">
+    <div class="wrap">
+      <div class="div-label">About</div>
+      <div class="about-grid">
+
+        <!-- LEFT: portrait + facts -->
+        <div>
+          <div class="portrait">
+            <div class="ph">
+              PORTRAIT
+              <b>Replace with your photo</b>
+            </div>
+          </div>
+          <div class="facts">
+            <span class="pill"><span class="dot"></span>Dnipro, Ukraine</span>
+            <span class="pill">UA · RU · EN</span>
+            <span class="pill">12+ yrs</span>
+            <span class="pill">Azure / AWS / GCP</span>
+          </div>
+        </div>
+
+        <!-- RIGHT: bio + timeline + credentials -->
+        <div>
+          <h2>Architect by day, automator by evening, live-coder by night.</h2>
+          <p class="lead" style="margin-top:18px">
+            I started as a system administrator, grew into DevOps, then into cloud architecture.
+            Today I lead Azure Solutions and the CoE — Critical Services at <strong>SoftServe</strong>,
+            where I help teams design distributed, scalable and secure cloud-native systems.
+          </p>
+          <p class="lead">
+            I think in systems — partly because I have a master's in theoretical physics, partly because
+            I have a second master's in educational psychology, and partly because I trained as an NLP
+            Master Practitioner and professional coach. Useful combo when an architecture problem turns
+            out to be a people problem.
+          </p>
+
+          <div class="div-label" style="margin-top:36px">Experience</div>
+          <div class="timeline">
+            <div class="tl-row">
+              <div class="y">2023 — now</div>
+              <div class="b">
+                <strong>Azure Solutions Lead · SoftServe</strong>
+                <span>CI/CD &amp; cloud assessments, pre-sales, Microsoft Advanced Specializations, R&amp;D for Azure / Azure DevOps.</span>
+              </div>
+            </div>
+            <div class="tl-row">
+              <div class="y">2019 — 2023</div>
+              <div class="b">
+                <strong>DevOps Architect · SoftServe</strong>
+                <span>DevOps knowledge model, operational support, leading the company-wide interviewers' community.</span>
+              </div>
+            </div>
+            <div class="tl-row">
+              <div class="y">2018 — 2019</div>
+              <div class="b">
+                <strong>IT Academy Expert · SoftServe</strong>
+                <span>Built a DevOps course from scratch and mentored students.</span>
+              </div>
+            </div>
+            <div class="tl-row">
+              <div class="y">2016 — 2019</div>
+              <div class="b">
+                <strong>Lead DevOps Engineer · SoftServe</strong>
+                <span>Managed teams up to 20 people, owned CI/CD and cloud-migration support.</span>
+              </div>
+            </div>
+            <div class="tl-row">
+              <div class="y">2012 — 2016</div>
+              <div class="b">
+                <strong>DevOps Engineer · SoftServe / FEEDGEE / Sitecore</strong>
+                <span>Deployment, CI services, release management, application monitoring.</span>
+              </div>
+            </div>
+            <div class="tl-row">
+              <div class="y">2009 — 2012</div>
+              <div class="b">
+                <strong>System / network admin · Volia, TRC Falstap</strong>
+                <span>Linux/FreeBSD, Cisco, Hyper-V, monitoring stacks.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="div-label" style="margin-top:36px">Credentials</div>
+          <div class="cred">
+            <div class="c"><div class="l">Certification</div><b>AZ-400 — Microsoft DevOps Solutions</b></div>
+            <div class="c"><div class="l">Coaching</div><b>NLP Master Practitioner · Professional Coach · Business Trainer</b></div>
+            <div class="c"><div class="l">Education</div><b>M.Phys, Theoretical Physics — Dnipropetrovsk National University</b></div>
+            <div class="c"><div class="l">Education</div><b>M.Ed, Educational Psychology — Dnipropetrovsk National University</b></div>
+            <div class="c"><div class="l">Publication</div><b>Designing eLearning course using LMS MOODLE</b></div>
+            <div class="c"><div class="l">Languages</div><b>Ukrainian · Russian (native) · English (working)</b></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-grid { display: grid; grid-template-columns: 0.9fr 1.4fr; gap: 48px; align-items: start; }
+  @media (max-width: 780px) { .about-grid { grid-template-columns: 1fr; gap: 24px; } }
+
+  .portrait {
+    aspect-ratio: 4/5;
+    width: 100%;
+    max-width: 340px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 18px;
+    color: var(--muted);
+  }
+  .portrait::before {
+    content: '';
+    position: absolute;
+    inset: 14px;
+    border: 1px dashed var(--line);
+    border-radius: 14px;
+  }
+  .portrait::after {
+    content: 'DK';
+    position: absolute;
+    right: -18px;
+    bottom: -46px;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 240px;
+    color: var(--navy-soft);
+    letter-spacing: -0.06em;
+    line-height: 1;
+    z-index: 1;
+  }
+  .portrait .ph {
+    position: relative;
+    z-index: 2;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .portrait .ph b {
+    display: block;
+    font-size: 13px;
+    color: var(--ink);
+    margin-top: 4px;
+    letter-spacing: 0;
+    text-transform: none;
+    font-weight: 500;
+    font-family: var(--sans);
+  }
+
+  .facts { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .facts .pill { font-size: 12px; padding: 6px 12px; }
+
+  .timeline { display: flex; flex-direction: column; gap: 0; margin-top: 8px; }
+  .tl-row { display: grid; grid-template-columns: 120px 1fr; gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--line); align-items: start; }
+  .tl-row:last-child { border-bottom: 0; }
+  .tl-row .y { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 13px; font-weight: 500; }
+  .tl-row .b { font-size: 15px; }
+  .tl-row .b strong { display: block; font-weight: 600; margin-bottom: 2px; font-size: 15.5px; }
+  .tl-row .b span { color: var(--muted); font-size: 14px; }
+
+  .cred { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 14px; }
+  .cred .c { padding: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); font-size: 13.5px; }
+  .cred .c .l { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .cred .c b { font-weight: 600; }
+</style>

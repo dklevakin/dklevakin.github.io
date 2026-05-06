@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <rect width="240" height="240" rx="22" fill="#F4F1EA"/>
+  
+    <g transform="translate(40,40) scale(2.5)">
+      <!-- D -->
+      <path d="M14 12 L14 52 L30 52 C46 52 50 42 50 32 C50 22 46 12 30 12 Z"
+            fill="none" stroke="#1F2A3D" stroke-width="3.2" stroke-linejoin="round"/>
+      <!-- K (correctly oriented, inscribed inside D) -->
+      <path d="M22 18 L22 46" fill="none" stroke="#C9A961" stroke-width="2.8" stroke-linecap="round"/>
+      <path d="M22 32 L40 18" fill="none" stroke="#C9A961" stroke-width="2.8" stroke-linecap="round"/>
+      <path d="M22 32 L40 46" fill="none" stroke="#C9A961" stroke-width="2.8" stroke-linecap="round"/>
+      <circle cx="22" cy="32" r="2" fill="#C9A961"/>
+    </g>
+    
+</svg>

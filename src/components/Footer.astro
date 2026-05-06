@@ -1,0 +1,64 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site">
+  <div class="wrap row">
+    <div class="brand">
+      <svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M14 12 L14 52 L30 52 C46 52 50 42 50 32 C50 22 46 12 30 12 Z"
+              fill="none" stroke="#F4F1EA" stroke-width="3.2"/>
+        <path d="M22 18 L22 46" fill="none" stroke="#C9A961" stroke-width="2.8" stroke-linecap="round"/>
+        <path d="M22 32 L40 18" fill="none" stroke="#C9A961" stroke-width="2.8" stroke-linecap="round"/>
+        <path d="M22 32 L40 46" fill="none" stroke="#C9A961" stroke-width="2.8" stroke-linecap="round"/>
+        <circle cx="22" cy="32" r="2" fill="#C9A961"/>
+      </svg>
+      <span class="brand-name">
+        Dmytro Klevakin
+        <span class="sub">klevakin.com</span>
+      </span>
+    </div>
+    <div class="legal">
+      © {year} · Built quietly in Dnipro ·
+      <a href="https://github.com/dklevakin" target="_blank" rel="noopener">github.com/dklevakin</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer.site {
+    background: var(--navy);
+    color: var(--muted-2);
+    padding: 48px 0;
+    font-size: 13px;
+    margin-top: 80px;
+  }
+  footer.site .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .brand-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--paper);
+  }
+  .brand-name .sub {
+    display: block;
+    font-size: 11px;
+    color: var(--muted-2);
+    letter-spacing: 0.1em;
+    font-weight: 400;
+    margin-top: 2px;
+  }
+  footer.site a { color: var(--muted-2); }
+  footer.site a:hover { color: var(--gold); }
+  .legal { font-size: 12px; }
+</style>

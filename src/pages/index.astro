@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Dmytro Klevakin — Cloud Solution Architect"
+  description="Azure Solutions Lead with 12+ years designing cloud-native systems. Architect by day, automator by evening, live-coding musician by night."
+>
+  <!-- HERO -->
+  <section class="page hero">
+    <div class="wrap">
+      <div class="eyebrow">Dmytro Klevakin · Dnipro, Ukraine</div>
+      <h1 style="margin-top:18px">Architect <em>as a</em><br><u>lifestyle</u>.</h1>
+      <p class="lead" style="margin-top:28px">
+        I'm an Azure Solutions Lead at SoftServe with 12+ years designing
+        cloud-native systems across Azure, AWS and GCP. I make complex platforms
+        <em style="font-style:italic;color:var(--navy)">calm</em> — and I write down what I learn at <code>klevakin.com</code>.
+      </p>
+      <div class="meta">
+        <span class="pill"><span class="dot live"></span>Open for short engagements</span>
+        <span class="pill"><span class="dot"></span>Azure · AWS · GCP</span>
+        <span class="pill"><span class="dot"></span>Based in Dnipro 🇺🇦</span>
+      </div>
+      <div class="cta-row">
+        <a class="btn gold" href="mailto:kl.dmitri@gmail.com">Write me an email →</a>
+        <a class="btn ghost" href="/projects">See projects</a>
+      </div>
+
+      <!-- BENTO GRID -->
+      <div class="bento" aria-label="At a glance">
+        <div class="card span2 row2">
+          <div>
+            <div class="lbl">Experience</div>
+            <div class="num">12+</div>
+          </div>
+          <div class="lbl">years across Cloud · DevOps · Architecture roles, mostly at SoftServe</div>
+        </div>
+        <div class="card span2 navy">
+          <div class="lbl">Primary cloud</div>
+          <div class="num" style="font-size:36px">Microsoft Azure</div>
+        </div>
+        <div class="card span2">
+          <div class="lbl">Certifications</div>
+          <div class="num" style="font-size:30px">AZ-400</div>
+          <div class="lbl">+ NLP Master Practitioner · Professional Coach</div>
+        </div>
+        <div class="card span2 gold">
+          <div class="now-now"><span class="blink"></span>Now</div>
+          <div style="font-size:14px;line-height:1.45">
+            Leading the Azure CoE — Critical Services at SoftServe.
+            Live-coding music with Strudel on weekends.
+          </div>
+        </div>
+        <div class="card span4">
+          <div class="lbl">What this site is</div>
+          <div style="font-family:var(--serif);font-size:22px;line-height:1.3;font-weight:400;color:var(--ink)">
+            A logbook for cloud, automation and AI — plus a corner for the music I make outside work.
+          </div>
+        </div>
+      </div>
+
+      <!-- SERVICE TEASERS -->
+      <div class="teaser">
+        <a href="/services" class="t-card">
+          <div class="ico">CL</div>
+          <h3>Cloud architecture</h3>
+          <p>Landing zones, migrations, well-architected reviews — Azure-first, multi-cloud aware.</p>
+          <span class="more">See services</span>
+        </a>
+        <a href="/services" class="t-card">
+          <div class="ico">DO</div>
+          <h3>DevOps &amp; automation</h3>
+          <p>Azure DevOps, GitHub Actions, Terraform, Bicep. Pipelines that survive Mondays.</p>
+          <span class="more">See services</span>
+        </a>
+        <a href="/services" class="t-card">
+          <div class="ico">AI</div>
+          <h3>AI &amp; vibe coding</h3>
+          <p>Practical use of Claude / Copilot, custom skills, internal AI tooling — without losing taste.</p>
+          <span class="more">See services</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero { padding-top: 64px; padding-bottom: 24px; }
+  .hero h1 em { font-style: italic; font-weight: 300; color: var(--navy); }
+  .hero h1 u  { text-decoration: none; background-image: linear-gradient(transparent 60%, rgba(201,169,97,0.45) 60%); padding: 0 2px; }
+  .meta { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .cta-row { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px; }
+
+  .bento {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: minmax(110px, auto);
+    gap: 14px;
+  }
+  .bento .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 22px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; transition: transform 0.15s, border-color 0.15s; }
+  .bento .card:hover { transform: translateY(-2px); border-color: var(--navy); }
+  .bento .span2 { grid-column: span 2; }
+  .bento .span4 { grid-column: span 4; }
+  .bento .row2  { grid-row: span 2; }
+  .bento .num { font-family: var(--serif); font-size: 48px; line-height: 1; letter-spacing: -0.03em; color: var(--navy); font-weight: 400; }
+  .bento .lbl { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
+  .bento .navy { background: var(--navy); color: var(--paper); border-color: var(--navy); }
+  .bento .navy .num, .bento .navy .lbl { color: var(--paper); }
+  .bento .navy .lbl { color: var(--muted-2); }
+  .bento .gold { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+  .now-now { display: flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--navy); font-weight: 500; }
+  .blink { width: 8px; height: 8px; border-radius: 50%; background: var(--navy); animation: blink 1.4s ease-in-out infinite; display: inline-block; border-radius: 50%; }
+  @media (max-width: 780px) { .bento { grid-template-columns: repeat(2, 1fr); } .bento .span2, .bento .span4 { grid-column: span 2; } }
+
+  .teaser { margin-top: 80px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .t-card { padding: 26px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); transition: border-color 0.15s; display: flex; flex-direction: column; }
+  .t-card:hover { border-color: var(--navy); }
+  .t-card .ico { width: 34px; height: 34px; border-radius: 8px; background: var(--navy); color: var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 14px; font-weight: 500; margin-bottom: 14px; letter-spacing: -0.04em; }
+  .t-card h3 { margin-bottom: 6px; }
+  .t-card p { color: var(--muted); font-size: 14.5px; flex: 1; }
+  .t-card .more { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-size: 13px; color: var(--navy); font-weight: 500; }
+  .t-card .more::after { content: "→"; transition: transform 0.15s; }
+  .t-card:hover .more::after { transform: translateX(3px); }
+  @media (max-width: 780px) { .teaser { grid-template-columns: 1fr; } }
+</style>

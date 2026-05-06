@@ -1,0 +1,122 @@
+---
+const pathname = Astro.url.pathname;
+
+const navLinks = [
+  { href: '/',         label: 'Home' },
+  { href: '/about',    label: 'About' },
+  { href: '/services', label: 'Services' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/writing',  label: 'Writing' },
+  { href: '/music',    label: 'Music' },
+  { href: '/contact',  label: 'Contact' },
+];
+
+function isActive(href: string): boolean {
+  if (href === '/') return pathname === '/';
+  return pathname.startsWith(href);
+}
+---
+
+<header class="site">
+  <div class="wrap row">
+    <a href="/" class="brand" aria-label="Dmytro Klevakin — Home">
+      <!-- DK monogram SVG -->
+      <svg width="38" height="38" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M14 12 L14 52 L30 52 C46 52 50 42 50 32 C50 22 46 12 30 12 Z"
+              fill="none" stroke="#1F2A3D" stroke-width="3.2" stroke-linejoin="round"/>
+        <path d="M22 18 L22 46" fill="none" stroke="#C9A961" stroke-width="2.8" stroke-linecap="round"/>
+        <path d="M22 32 L40 18" fill="none" stroke="#C9A961" stroke-width="2.8" stroke-linecap="round"/>
+        <path d="M22 32 L40 46" fill="none" stroke="#C9A961" stroke-width="2.8" stroke-linecap="round"/>
+        <circle cx="22" cy="32" r="2" fill="#C9A961"/>
+      </svg>
+      <span class="brand-name">
+        Dmytro Klevakin
+        <span class="sub">Cloud · Architecture · Music</span>
+      </span>
+    </a>
+
+    <nav class="primary" aria-label="Main navigation">
+      {navLinks.map(({ href, label }) => (
+        <a href={href} class={isActive(href) ? 'active' : ''}>{label}</a>
+      ))}
+    </nav>
+
+    <a class="hire" href="mailto:kl.dmitri@gmail.com">
+      Hire me <span style="color:var(--gold)">→</span>
+    </a>
+  </div>
+</header>
+
+<style>
+  header.site {
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: saturate(140%) blur(8px);
+  }
+  header.site .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 14px 0;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .brand-name {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.005em;
+    line-height: 1.1;
+  }
+  .brand-name .sub {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 2px;
+  }
+  nav.primary {
+    display: flex;
+    gap: 2px;
+    flex-wrap: wrap;
+  }
+  nav.primary a {
+    font-size: 14px;
+    color: var(--ink);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background 0.15s, color 0.15s;
+    border-bottom: 2px solid transparent;
+  }
+  nav.primary a:hover  { background: var(--paper-2); }
+  nav.primary a.active { color: var(--navy); border-bottom-color: var(--gold); }
+  .hire {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--navy);
+    color: var(--paper);
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid var(--navy);
+    transition: background 0.15s, transform 0.12s;
+    white-space: nowrap;
+  }
+  .hire:hover { background: var(--navy-2); transform: translateY(-1px); }
+  @media (max-width: 760px) {
+    nav.primary { display: none; }
+    .brand-name .sub { display: none; }
+  }
+</style>

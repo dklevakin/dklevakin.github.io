@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+---
+
+<BaseLayout
+  title="Services — Dmytro Klevakin"
+  description="Cloud architecture, DevOps & automation, AI & vibe coding, and coaching. Short engagements, focused outcomes."
+>
+  <section class="page">
+    <div class="wrap">
+      <div class="div-label">Services</div>
+      <h2>Four ways I'm happy to help.</h2>
+      <p class="lead muted" style="margin-top:14px">
+        Short engagements work best — a single review, a focused workshop, a 2-week scoping sprint.
+        For deeper involvement let's chat first and shape it together.
+      </p>
+
+      <div class="svc" style="margin-top:36px">
+        <ServiceCard
+          icon="CL"
+          title="Cloud architecture"
+          description="Azure-first, multi-cloud aware. I'll help you choose, design and de-risk — using Well-Architected and Cloud Adoption frameworks as the backbone."
+          items={[
+            'Architecture review (1–2 weeks)',
+            'Landing zone & tenant design (Azure / AWS / GCP)',
+            'Migration roadmap & cost-optimization (FinOps)',
+            'ASR & backup strategies for on-prem → cloud',
+          ]}
+        />
+        <ServiceCard
+          icon="DO"
+          title="DevOps & automation"
+          description="Pipelines that survive Mondays. ARM, Bicep, Terraform, Ansible. Azure DevOps and GitHub Actions, with the boring quality gates that actually catch things."
+          items={[
+            'CI/CD assessment & redesign',
+            'IaC modules (Terraform / Bicep / ARM)',
+            'SonarQube · Artifactory · Ansible integration',
+            'Internal developer platform setup',
+          ]}
+        />
+        <ServiceCard
+          icon="AI"
+          title="AI & vibe coding"
+          description="How to actually use Claude / Copilot in day-to-day engineering, where to deploy custom skills, and how to ship faster without losing taste."
+          items={[
+            'AI workflow audit for engineering teams',
+            'Custom Claude / MCP skills tailored to your stack',
+            'Internal AI tooling (RAG over docs, code Q&A)',
+            'Hands-on enablement workshop',
+          ]}
+        />
+        <ServiceCard
+          icon="CO"
+          title="Coaching & mentoring"
+          description="Some architecture problems are people problems. As a certified NLP Master Practitioner and professional coach, I work with leads and architects on the human layer."
+          items={[
+            '1:1 coaching for Cloud / DevOps leads',
+            'Career-path mentoring (engineer → architect)',
+            'Team workshops on technical decision making',
+            'Interviewer / hiring-process coaching',
+          ]}
+        />
+      </div>
+
+      <div class="svc-cta">
+        <div>
+          <h3>Not sure which one fits?</h3>
+          <p>Send a paragraph about what you're working on. I'll suggest the smallest possible engagement that actually helps.</p>
+        </div>
+        <a class="btn gold" href="mailto:kl.dmitri@gmail.com">Write me an email →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .svc { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  @media (max-width: 780px) { .svc { grid-template-columns: 1fr; } }
+  .svc-cta {
+    margin-top: 34px;
+    padding: 30px;
+    background: var(--navy);
+    color: var(--paper);
+    border-radius: var(--r-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+  .svc-cta h3 { color: var(--paper); font-family: var(--serif); font-size: 24px; font-weight: 400; margin: 0; }
+  .svc-cta p { color: var(--muted-2); margin: 6px 0 0; font-size: 14.5px; max-width: 520px; }
+</style>

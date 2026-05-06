@@ -1,0 +1,262 @@
+/* ============================================================
+   KLEVAKIN.COM — Global CSS
+   Design system: Letterpress Indigo
+   All :root tokens, @font-face, reset, and base typography.
+   Component-specific styles live in each .astro file.
+   ============================================================ */
+
+/* ── @font-face ── */
+
+@font-face {
+  font-family: 'Fraunces';
+  src: url('/fonts/Fraunces-VariableFont.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fraunces';
+  src: url('/fonts/Fraunces-Italic-VariableFont.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Manrope';
+  src: url('/fonts/Manrope-VariableFont.woff2') format('woff2');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-VariableFont.woff2') format('woff2');
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Italic-VariableFont.woff2') format('woff2');
+  font-weight: 100 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ── Design tokens ── */
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces */
+  --paper:      #F4F1EA;
+  --paper-2:    #EDE8DC;
+  --surface:    #FFFFFF;
+
+  /* Navy scale */
+  --navy:       #1F2A3D;
+  --navy-2:     #2B3A52;
+  --navy-soft:  #E5E8EE;
+
+  /* Text */
+  --ink:        #14181F;
+  --muted:      #6B7280;
+  --muted-2:    #9AA0AB;
+
+  /* Accents */
+  --gold:       #C9A961;
+  --gold-deep:  #A88A47;
+  --terra:      #E07A5F;
+
+  /* Borders & code */
+  --line:       #E2DED2;
+  --code:       #ECE8DC;
+
+  /* Radii */
+  --r-sm:       6px;
+  --r-md:       10px;
+  --r-lg:       18px;
+
+  /* Layout */
+  --maxw:       1080px;
+
+  /* Typefaces */
+  --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --sans:  'Manrope', -apple-system, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
+  --mono:  'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+}
+
+/* ── Reset ── */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a   { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+
+::selection { background: var(--gold); color: var(--navy); }
+
+/* ── Base typography ── */
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin: 0;
+  font-style: normal;
+}
+h1 {
+  font-size: clamp(44px, 7vw, 88px);
+  line-height: 0.98;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+h2 {
+  font-size: clamp(28px, 4vw, 46px);
+  line-height: 1.05;
+  font-weight: 400;
+}
+h3 {
+  font-size: 20px;
+  line-height: 1.25;
+  font-weight: 500;
+  font-family: var(--sans);
+  letter-spacing: -0.01em;
+}
+p { margin: 0 0 12px; }
+
+/* ── Utilities ── */
+
+.wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+code, kbd {
+  font-family: var(--mono);
+  font-size: 0.92em;
+  background: var(--code);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* ── Generic page section ── */
+
+section.page {
+  padding: 64px 0 96px;
+  animation: fadeIn 0.35s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.div-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.div-label::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.lead {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink);
+  max-width: 640px;
+}
+
+.muted { color: var(--muted); }
+
+/* ── Buttons ── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 20px;
+  border-radius: 9px;
+  font-weight: 500;
+  font-size: 14px;
+  border: 1px solid var(--navy);
+  transition: transform 0.12s ease, background 0.15s ease, color 0.15s;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn.solid { background: var(--navy); color: var(--paper); }
+.btn.solid:hover { background: var(--navy-2); }
+.btn.gold  { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+.btn.gold:hover { background: var(--gold-deep); color: var(--paper); }
+.btn.ghost { background: transparent; color: var(--navy); }
+.btn.ghost:hover { background: var(--navy); color: var(--paper); }
+
+/* ── Pill badge ── */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 13px;
+  color: var(--ink);
+}
+.pill .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+.pill .dot.live {
+  background: #16A34A;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.18);
+}
+
+/* ── Misc layout helpers ── */
+
+.row-flex {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* ── Blink animation (used in bento "Now" card) ── */
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}

@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact — Dmytro Klevakin"
+  description="Say hi — easiest way is email. I read everything and reply within a couple of days."
+>
+  <section class="page">
+    <div class="wrap">
+      <div class="div-label">Contact</div>
+      <h2>Say hi.</h2>
+      <p class="lead muted" style="margin-top:14px">
+        Easiest way is email — I read everything and reply within a couple of days.
+      </p>
+
+      <div class="contact-grid" style="margin-top:32px">
+        <div class="email-block">
+          <div class="div-label" style="margin-bottom:0">Email</div>
+          <a class="em" href="mailto:kl.dmitri@gmail.com">kl.dmitri@gmail.com</a>
+          <p class="muted" style="font-size:14px">
+            For quick questions LinkedIn DMs work too. For longer conversations,
+            just write a paragraph and I'll suggest a time.
+          </p>
+          <a class="btn gold" href="mailto:kl.dmitri@gmail.com" style="margin-top:6px">
+            Open email client →
+          </a>
+        </div>
+
+        <div>
+          <div class="div-label">Elsewhere</div>
+          <div class="social">
+            <a href="https://github.com/dklevakin"           target="_blank" rel="noopener">GitHub <span class="arr">↗</span></a>
+            <a href="https://www.linkedin.com/in/dklevakin"  target="_blank" rel="noopener">LinkedIn <span class="arr">↗</span></a>
+            <a href="https://x.com/dklevakin"                target="_blank" rel="noopener">X / Twitter <span class="arr">↗</span></a>
+            <a href="https://dev.to/dklevakin"               target="_blank" rel="noopener">DEV.to <span class="arr">↗</span></a>
+            <a href="https://soundcloud.com/dklevakin"       target="_blank" rel="noopener">SoundCloud <span class="arr">↗</span></a>
+            <a href="https://strudel.cc"                     target="_blank" rel="noopener">Strudel REPL <span class="arr">↗</span></a>
+          </div>
+          <div class="div-label" style="margin-top:24px">Location</div>
+          <p class="muted" style="font-size:14px;margin:0">
+            Dnipro, Ukraine · UTC+2 (UTC+3 in summer) · usually online 09:00–19:00.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  @media (max-width: 780px) { .contact-grid { grid-template-columns: 1fr; } }
+  .email-block { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px; }
+  .em { font-family: var(--mono); font-size: 18px; color: var(--navy); font-weight: 500; display: block; margin: 14px 0; }
+  .social { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 6px; }
+  .social a { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border: 1px solid var(--line); border-radius: var(--r-md); font-size: 14px; font-weight: 500; background: var(--surface); transition: border-color 0.15s, transform 0.12s; }
+  .social a:hover { border-color: var(--navy); transform: translateY(-1px); }
+  .arr { color: var(--muted); font-family: var(--mono); font-size: 13px; }
+</style>

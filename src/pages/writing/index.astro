@@ -1,0 +1,74 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../components/BaseLayout.astro';
+import PostRow from '../../components/PostRow.astro';
+
+const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout
+  title="Writing — Dmytro Klevakin"
+  description="Three series on Cloud & DevOps, AI & vibe coding, and Automation. Notes I keep, in case they help you too."
+>
+  <section class="page">
+    <div class="wrap">
+      <div class="div-label">Writing</div>
+      <h2>Notes I keep, in case they help you too.</h2>
+      <p class="lead muted" style="margin-top:14px">Three regular series, plus the occasional one-off.</p>
+
+      <!-- Series cards -->
+      <div class="series" style="margin-top:32px">
+        <div class="sc">
+          <div class="tag"><span class="sq"></span>Cloud &amp; DevOps</div>
+          <h3>Pragmatic platform building.</h3>
+          <p>Lessons from running infra in production — what worked, what burned us, and the cheap fixes that paid off.</p>
+        </div>
+        <div class="sc">
+          <div class="tag"><span class="sq" style="background:var(--terra)"></span>AI &amp; vibe coding</div>
+          <h3>Coding with an LLM in the loop.</h3>
+          <p>Honest field notes on what AI tooling actually changes in day-to-day engineering — and where the hype evaporates.</p>
+        </div>
+        <div class="sc">
+          <div class="tag"><span class="sq" style="background:var(--navy)"></span>Automation</div>
+          <h3>Boring things, automated.</h3>
+          <p>Small wins that compound: scripts, GitHub Actions, glue between SaaS tools, and the occasional Bash one-liner.</p>
+        </div>
+      </div>
+
+      <!-- Recent posts from content collection -->
+      <div class="recent">
+        <div class="div-label">Recent posts</div>
+        {posts.map(post => (
+          <PostRow
+            date={post.data.date}
+            title={post.data.title}
+            category={post.data.category}
+            href={`/writing/${post.id}`}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .series { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 780px) { .series { grid-template-columns: 1fr; } }
+  .sc {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .sc:hover { border-color: var(--navy); transform: translateY(-2px); }
+  .tag { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--navy); font-weight: 600; }
+  .sq { width: 10px; height: 10px; border-radius: 2px; background: var(--gold); display: inline-block; }
+  .sc h3 { font-family: var(--serif); font-weight: 500; font-size: 22px; letter-spacing: -0.015em; line-height: 1.15; }
+  .sc p { color: var(--muted); font-size: 14px; margin: 0; }
+  .recent { margin-top: 48px; }
+</style>

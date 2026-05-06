@@ -43,7 +43,7 @@
   font-display: swap;
 }
 
-/* ── Design tokens ── */
+/* ── Design tokens — Light mode ── */
 
 :root {
   color-scheme: light;
@@ -72,6 +72,9 @@
   --line:       #E2DED2;
   --code:       #ECE8DC;
 
+  /* Blueprint grid overlay color */
+  --blueprint:  rgba(31, 42, 61, 0.055);
+
   /* Radii */
   --r-sm:       6px;
   --r-md:       10px;
@@ -84,6 +87,33 @@
   --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
   --sans:  'Manrope', -apple-system, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
   --mono:  'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+}
+
+/* ── Dark mode tokens ── */
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+
+  --paper:      #0E1116;
+  --paper-2:    #14181F;
+  --surface:    #1A1F28;
+
+  --navy:       #0A0E14;
+  --navy-2:     #1A1F28;
+  --navy-soft:  #232934;
+
+  --ink:        #E8E4D8;
+  --muted:      #8B95A5;
+  --muted-2:    #6B7280;
+
+  --gold:       #D4B36A;
+  --gold-deep:  #B59651;
+  --terra:      #E07A5F;
+
+  --line:       #232934;
+  --code:       #1A1F28;
+
+  --blueprint:  rgba(212, 179, 106, 0.08);
 }
 
 /* ── Reset ── */
@@ -99,6 +129,20 @@ html, body {
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+}
+
+/* ── Blueprint grid background ── */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background-image:
+    linear-gradient(var(--blueprint) 1px, transparent 1px),
+    linear-gradient(90deg, var(--blueprint) 1px, transparent 1px);
+  background-size: 48px 48px;
 }
 
 img { max-width: 100%; display: block; }
@@ -216,8 +260,8 @@ section.page {
 .btn:hover { transform: translateY(-1px); }
 .btn.solid { background: var(--navy); color: var(--paper); }
 .btn.solid:hover { background: var(--navy-2); }
-.btn.gold  { background: var(--gold); color: var(--navy); border-color: var(--gold); }
-.btn.gold:hover { background: var(--gold-deep); color: var(--paper); }
+.btn.gold  { background: var(--gold); color: #1F2A3D; border-color: var(--gold); }
+.btn.gold:hover { background: var(--gold-deep); color: #F4F1EA; }
 .btn.ghost { background: transparent; color: var(--navy); }
 .btn.ghost:hover { background: var(--navy); color: var(--paper); }
 

@@ -19,11 +19,11 @@ function isActive(href: string): boolean {
 
 <header class="site">
   <div class="wrap row">
+    <!-- Brand / Logo -->
     <a href="/" class="brand" aria-label="Dmytro Klevakin — Home">
-      <!-- DK monogram SVG -->
       <svg width="38" height="38" viewBox="0 0 64 64" aria-hidden="true">
         <path d="M14 12 L14 52 L30 52 C46 52 50 42 50 32 C50 22 46 12 30 12 Z"
-              fill="none" stroke="#1F2A3D" stroke-width="3.2" stroke-linejoin="round"/>
+              fill="none" stroke="#1F2A3D" stroke-width="3.2" stroke-linejoin="round" class="logo-d"/>
         <path d="M22 18 L22 46" fill="none" stroke="#C9A961" stroke-width="2.8" stroke-linecap="round"/>
         <path d="M22 32 L40 18" fill="none" stroke="#C9A961" stroke-width="2.8" stroke-linecap="round"/>
         <path d="M22 32 L40 46" fill="none" stroke="#C9A961" stroke-width="2.8" stroke-linecap="round"/>
@@ -35,17 +35,102 @@ function isActive(href: string): boolean {
       </span>
     </a>
 
+    <!-- Desktop nav -->
     <nav class="primary" aria-label="Main navigation">
       {navLinks.map(({ href, label }) => (
         <a href={href} class={isActive(href) ? 'active' : ''}>{label}</a>
       ))}
     </nav>
 
-    <a class="hire" href="mailto:kl.dmitri@gmail.com">
-      Hire me <span style="color:var(--gold)">→</span>
-    </a>
+    <!-- Right controls -->
+    <div class="controls">
+      <!-- Theme toggle -->
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <span class="icon-light">☀</span>
+        <span class="icon-dark">☾</span>
+      </button>
+
+      <!-- Hire me CTA -->
+      <a class="hire" href="mailto:kl.dmitri@gmail.com">
+        Hire me <span aria-hidden="true">→</span>
+      </a>
+
+      <!-- Hamburger (mobile only) -->
+      <button class="menubtn" id="menu-toggle" aria-label="Open navigation menu" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
   </div>
 </header>
+
+<!-- Mobile drawer -->
+<div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
+<nav class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation">
+  <div class="drawer-header">
+    <span class="drawer-brand">Dmytro Klevakin</span>
+    <button class="icon-btn" id="drawer-close" aria-label="Close navigation menu">✕</button>
+  </div>
+  <div class="drawer-links">
+    {navLinks.map(({ href, label }) => (
+      <a href={href} class={isActive(href) ? 'active' : ''}>{label}</a>
+    ))}
+  </div>
+  <div class="drawer-footer">
+    <a class="btn gold" href="mailto:kl.dmitri@gmail.com">Hire me →</a>
+  </div>
+</nav>
+
+<script>
+  // ── Theme toggle ──
+  const html = document.documentElement;
+  const themeBtn = document.getElementById('theme-toggle');
+
+  function getTheme() {
+    return html.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+  }
+
+  function setTheme(theme: string) {
+    if (theme === 'dark') {
+      html.setAttribute('data-theme', 'dark');
+    } else {
+      html.removeAttribute('data-theme');
+    }
+    try { localStorage.setItem('klv_theme', theme); } catch (e) {}
+  }
+
+  themeBtn?.addEventListener('click', () => {
+    setTheme(getTheme() === 'dark' ? 'light' : 'dark');
+  });
+
+  // ── Mobile drawer ──
+  const menuBtn      = document.getElementById('menu-toggle');
+  const drawerClose  = document.getElementById('drawer-close');
+  const backdrop     = document.getElementById('mobile-backdrop');
+  const drawer       = document.getElementById('mobile-drawer');
+
+  function openDrawer() {
+    drawer?.classList.add('open');
+    backdrop?.classList.add('open');
+    menuBtn?.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDrawer() {
+    drawer?.classList.remove('open');
+    backdrop?.classList.remove('open');
+    menuBtn?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  menuBtn?.addEventListener('click', openDrawer);
+  drawerClose?.addEventListener('click', closeDrawer);
+  backdrop?.addEventListener('click', closeDrawer);
+
+  // Close on nav link click (SPA-style navigation)
+  drawer?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+</script>
 
 <style>
   header.site {
@@ -53,8 +138,9 @@ function isActive(href: string): boolean {
     border-bottom: 1px solid var(--line);
     position: sticky;
     top: 0;
-    z-index: 50;
+    z-index: 100;
     backdrop-filter: saturate(140%) blur(8px);
+    transition: background 0.2s, border-color 0.2s;
   }
   header.site .row {
     display: flex;
@@ -63,10 +149,13 @@ function isActive(href: string): boolean {
     gap: 18px;
     padding: 14px 0;
   }
+
+  /* Brand */
   .brand {
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-shrink: 0;
   }
   .brand-name {
     font-family: var(--sans);
@@ -84,6 +173,13 @@ function isActive(href: string): boolean {
     font-weight: 500;
     margin-top: 2px;
   }
+
+  /* Logo D-path adapts in dark mode */
+  html[data-theme="dark"] .logo-d {
+    stroke: var(--gold);
+  }
+
+  /* Desktop nav */
   nav.primary {
     display: flex;
     gap: 2px;
@@ -100,10 +196,43 @@ function isActive(href: string): boolean {
   }
   nav.primary a:hover  { background: var(--paper-2); }
   nav.primary a.active { color: var(--navy); border-bottom-color: var(--gold); }
+
+  /* Controls row */
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  /* Icon button (theme toggle, close) */
+  .icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ink);
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .icon-btn:hover { background: var(--paper-2); border-color: var(--navy); }
+
+  /* Show ☀ in dark mode, ☾ in light mode */
+  .icon-light { display: none; }
+  .icon-dark  { display: inline; }
+  html[data-theme="dark"] .icon-light { display: inline; }
+  html[data-theme="dark"] .icon-dark  { display: none; }
+
+  /* Hire me */
   .hire {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     background: var(--navy);
     color: var(--paper);
     padding: 9px 16px;
@@ -115,8 +244,104 @@ function isActive(href: string): boolean {
     white-space: nowrap;
   }
   .hire:hover { background: var(--navy-2); transform: translateY(-1px); }
+
+  /* Hamburger button */
+  .menubtn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+  }
+  .bar {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: background 0.15s;
+  }
+
+  /* ── Mobile drawer ── */
+  .mobile-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 150;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .mobile-backdrop.open { opacity: 1; }
+
+  .mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 300px;
+    max-width: 90vw;
+    height: 100dvh;
+    background: var(--paper);
+    border-left: 1px solid var(--line);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    transition: right 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -4px 0 24px rgba(0,0,0,0.12);
+  }
+  .mobile-drawer.open { right: 0; }
+
+  .drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .drawer-brand {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+  }
+
+  .drawer-links {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0;
+    flex: 1;
+    overflow-y: auto;
+  }
+  .drawer-links a {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    padding: 14px 24px;
+    border-left: 3px solid transparent;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .drawer-links a:hover { background: var(--paper-2); }
+  .drawer-links a.active { color: var(--navy); border-left-color: var(--gold); background: var(--paper-2); }
+
+  .drawer-footer {
+    padding: 20px 24px;
+    border-top: 1px solid var(--line);
+  }
+  .drawer-footer .btn { width: 100%; justify-content: center; }
+
+  /* ── Responsive ── */
   @media (max-width: 760px) {
-    nav.primary { display: none; }
+    nav.primary     { display: none; }
     .brand-name .sub { display: none; }
+    .menubtn        { display: flex; }
+    .mobile-backdrop { display: block; pointer-events: none; }
+    .mobile-backdrop.open { pointer-events: auto; }
+    .hire { display: none; }
   }
 </style>

@@ -45,7 +45,7 @@ import BaseLayout from '../components/BaseLayout.astro';
           </div>
         </div>
 
-        <!-- Right: portrait -->
+        <!-- Right: portrait + site blurb -->
         <div class="hero-portrait-wrap">
           <div class="portrait-frame">
             <div class="portrait-inner">
@@ -60,6 +60,12 @@ import BaseLayout from '../components/BaseLayout.astro';
             <!-- Decorative elements -->
             <div class="portrait-corner-tl" aria-hidden="true"></div>
             <div class="portrait-accent"    aria-hidden="true"></div>
+          </div>
+
+          <!-- Site blurb card -->
+          <div class="site-blurb">
+            <div class="site-blurb-label">What this site is</div>
+            <p>A logbook for cloud, automation and AI — plus a corner for the music I make outside work.</p>
           </div>
         </div>
 
@@ -318,6 +324,32 @@ import BaseLayout from '../components/BaseLayout.astro';
     background: var(--navy);
     border-radius: 6px;
     pointer-events: none;
+  }
+
+  /* Site blurb card under portrait */
+  .site-blurb {
+    margin-top: 12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 20px 22px;
+  }
+  .site-blurb-label {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .site-blurb p {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--ink);
+    margin: 0;
+    letter-spacing: -0.01em;
   }
 
   /* ── Bento grid ── */

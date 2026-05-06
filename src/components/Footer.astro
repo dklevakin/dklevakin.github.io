@@ -5,13 +5,22 @@ const year = new Date().getFullYear();
 <footer class="site">
   <div class="wrap row">
     <div class="brand">
-      <svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true">
-        <path d="M14 12 L14 52 L30 52 C46 52 50 42 50 32 C50 22 46 12 30 12 Z"
-              fill="none" stroke="#F4F1EA" stroke-width="3.2"/>
-        <path d="M22 18 L22 46" fill="none" stroke="#C9A961" stroke-width="2.8" stroke-linecap="round"/>
-        <path d="M22 32 L40 18" fill="none" stroke="#C9A961" stroke-width="2.8" stroke-linecap="round"/>
-        <path d="M22 32 L40 46" fill="none" stroke="#C9A961" stroke-width="2.8" stroke-linecap="round"/>
-        <circle cx="22" cy="32" r="2" fill="#C9A961"/>
+      <!-- Solid Pivot — paper/gold on navy background (footer is already navy) -->
+      <svg width="30" height="29" viewBox="0 0 104 100" aria-hidden="true">
+        <!-- D spine: three paper circles -->
+        <circle cx="26" cy="26" r="6" fill="#F4F1EA"/>
+        <circle cx="26" cy="50" r="6" fill="#F4F1EA"/>
+        <circle cx="26" cy="74" r="6" fill="#F4F1EA"/>
+        <!-- D bezier curve -->
+        <path d="M26 26 Q56 26 56 50 Q56 74 26 74" stroke="#F4F1EA" stroke-width="3" fill="none"/>
+        <!-- Pivot (large gold circle) -->
+        <circle cx="58" cy="50" r="9" fill="#C9A961"/>
+        <!-- K branches: two gold circles -->
+        <circle cx="78" cy="26" r="6" fill="#C9A961"/>
+        <circle cx="78" cy="74" r="6" fill="#C9A961"/>
+        <!-- K lines -->
+        <line x1="58" y1="50" x2="78" y2="26" stroke="#C9A961" stroke-width="3"/>
+        <line x1="58" y1="50" x2="78" y2="74" stroke="#C9A961" stroke-width="3"/>
       </svg>
       <span class="brand-name">
         Dmytro Klevakin

@@ -48,8 +48,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image"       content={new URL(ogImage, Astro.site)} />
 
-  <!-- Favicon — DK monogram inlined as SVG data URI -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%231F2A3D'/><path d='M14 12 L14 52 L30 52 C46 52 50 42 50 32 C50 22 46 12 30 12 Z' fill='none' stroke='%23F4F1EA' stroke-width='3.2'/><path d='M22 18 L22 46 M22 32 L40 18 M22 32 L40 46' fill='none' stroke='%23C9A961' stroke-width='2.8' stroke-linecap='round'/><circle cx='22' cy='32' r='2' fill='%23C9A961'/></svg>" />
+  <!-- Favicon — Solid Pivot logo inlined as SVG data URI -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 104 100'><rect width='104' height='100' rx='16' fill='%231F2A3D'/><circle cx='26' cy='26' r='6' fill='%23F4F1EA'/><circle cx='26' cy='50' r='6' fill='%23F4F1EA'/><circle cx='26' cy='74' r='6' fill='%23F4F1EA'/><path d='M26 26 Q56 26 56 50 Q56 74 26 74' stroke='%23F4F1EA' stroke-width='3' fill='none'/><circle cx='58' cy='50' r='9' fill='%23C9A961'/><circle cx='78' cy='26' r='6' fill='%23C9A961'/><circle cx='78' cy='74' r='6' fill='%23C9A961'/><line x1='58' y1='50' x2='78' y2='26' stroke='%23C9A961' stroke-width='3'/><line x1='58' y1='50' x2='78' y2='74' stroke='%23C9A961' stroke-width='3'/></svg>" />
 
   <!-- RSS autodiscovery -->
   <link rel="alternate" type="application/rss+xml" title="Dmytro Klevakin" href="/rss.xml" />

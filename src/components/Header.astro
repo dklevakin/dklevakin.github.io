@@ -21,40 +21,30 @@ function isActive(href: string): boolean {
   <div class="wrap row">
     <!-- Brand / Logo -->
     <a href="/" class="brand" aria-label="Dmytro Klevakin — Home">
-      <!-- Light mode logo (no badge) -->
-      <svg class="logo-light" width="38" height="38" viewBox="0 0 104 100" aria-hidden="true">
-        <!-- D spine: three navy circles -->
-        <circle cx="26" cy="26" r="6" fill="#1F2A3D"/>
-        <circle cx="26" cy="50" r="6" fill="#1F2A3D"/>
-        <circle cx="26" cy="74" r="6" fill="#1F2A3D"/>
-        <!-- D bezier curve -->
-        <path d="M26 26 Q56 26 56 50 Q56 74 26 74" stroke="#1F2A3D" stroke-width="3" fill="none"/>
-        <!-- Pivot (large gold circle) -->
-        <circle cx="58" cy="50" r="9" fill="#C9A961"/>
-        <!-- K branches: two gold circles -->
-        <circle cx="78" cy="26" r="6" fill="#C9A961"/>
-        <circle cx="78" cy="74" r="6" fill="#C9A961"/>
-        <!-- K lines -->
-        <line x1="58" y1="50" x2="78" y2="26" stroke="#C9A961" stroke-width="3"/>
-        <line x1="58" y1="50" x2="78" y2="74" stroke="#C9A961" stroke-width="3"/>
+      <!-- Light mode logo: navy on transparent -->
+      <svg class="logo-light" width="36" height="36" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="17" cy="17" r="4" fill="#1F2A3D"/>
+        <circle cx="17" cy="32" r="4" fill="#1F2A3D"/>
+        <circle cx="17" cy="47" r="4" fill="#1F2A3D"/>
+        <path d="M17 17 Q36 17 37 32 Q36 47 17 47" fill="none" stroke="#1F2A3D" stroke-width="2"/>
+        <circle cx="38" cy="32" r="6" fill="#C9A961"/>
+        <circle cx="50" cy="17" r="4" fill="#C9A961"/>
+        <circle cx="50" cy="47" r="4" fill="#C9A961"/>
+        <line x1="38" y1="32" x2="50" y2="17" stroke="#C9A961" stroke-width="2"/>
+        <line x1="38" y1="32" x2="50" y2="47" stroke="#C9A961" stroke-width="2"/>
       </svg>
-      <!-- Dark mode logo (navy badge) -->
-      <svg class="logo-dark" width="38" height="38" viewBox="0 0 104 100" aria-hidden="true">
-        <rect width="104" height="100" rx="16" fill="#1F2A3D"/>
-        <!-- D spine: three paper circles -->
-        <circle cx="26" cy="26" r="6" fill="#F4F1EA"/>
-        <circle cx="26" cy="50" r="6" fill="#F4F1EA"/>
-        <circle cx="26" cy="74" r="6" fill="#F4F1EA"/>
-        <!-- D bezier curve -->
-        <path d="M26 26 Q56 26 56 50 Q56 74 26 74" stroke="#F4F1EA" stroke-width="3" fill="none"/>
-        <!-- Pivot (large gold circle) -->
-        <circle cx="58" cy="50" r="9" fill="#C9A961"/>
-        <!-- K branches: two gold circles -->
-        <circle cx="78" cy="26" r="6" fill="#C9A961"/>
-        <circle cx="78" cy="74" r="6" fill="#C9A961"/>
-        <!-- K lines -->
-        <line x1="58" y1="50" x2="78" y2="26" stroke="#C9A961" stroke-width="3"/>
-        <line x1="58" y1="50" x2="78" y2="74" stroke="#C9A961" stroke-width="3"/>
+      <!-- Dark mode logo: paper/gold on navy badge -->
+      <svg class="logo-dark" width="36" height="36" viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#2B3A52"/>
+        <circle cx="17" cy="17" r="4" fill="#F4F1EA"/>
+        <circle cx="17" cy="32" r="4" fill="#F4F1EA"/>
+        <circle cx="17" cy="47" r="4" fill="#F4F1EA"/>
+        <path d="M17 17 Q36 17 37 32 Q36 47 17 47" fill="none" stroke="#F4F1EA" stroke-width="2"/>
+        <circle cx="38" cy="32" r="6" fill="#C9A961"/>
+        <circle cx="50" cy="17" r="4" fill="#C9A961"/>
+        <circle cx="50" cy="47" r="4" fill="#C9A961"/>
+        <line x1="38" y1="32" x2="50" y2="17" stroke="#C9A961" stroke-width="2"/>
+        <line x1="38" y1="32" x2="50" y2="47" stroke="#C9A961" stroke-width="2"/>
       </svg>
       <span class="brand-name">
         Dmytro Klevakin
@@ -71,6 +61,11 @@ function isActive(href: string): boolean {
 
     <!-- Right controls -->
     <div class="controls">
+      <!-- Language toggle -->
+      <button class="icon-btn lang-btn" id="lang-toggle" title="Switch language" aria-label="Switch language">
+        <span class="lang-on">EN</span><span class="lang-sep">/</span><span class="lang-off">UA</span>
+      </button>
+
       <!-- Theme toggle -->
       <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
         <span class="icon-light">☀</span>
@@ -224,6 +219,7 @@ function isActive(href: string): boolean {
   }
   nav.primary a:hover  { background: var(--paper-2); }
   nav.primary a.active { color: var(--navy); border-bottom-color: var(--gold); }
+  html[data-theme="dark"] nav.primary a.active { color: var(--ink); }
 
   /* Controls row */
   .controls {
@@ -256,6 +252,12 @@ function isActive(href: string): boolean {
   html[data-theme="dark"] .icon-light { display: inline; }
   html[data-theme="dark"] .icon-dark  { display: none; }
 
+  /* Language toggle */
+  .lang-btn { padding: 0 11px; width: auto; gap: 3px; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; }
+  .lang-sep { color: var(--muted); font-weight: 400; }
+  .lang-on  { color: var(--ink); }
+  .lang-off { color: var(--muted); }
+
   /* Hire me */
   .hire {
     display: inline-flex;
@@ -272,6 +274,12 @@ function isActive(href: string): boolean {
     white-space: nowrap;
   }
   .hire:hover { background: var(--navy-2); transform: translateY(-1px); }
+  html[data-theme="dark"] .hire {
+    background: var(--gold);
+    color: #1F2A3D;
+    border-color: var(--gold);
+  }
+  html[data-theme="dark"] .hire:hover { background: var(--gold-deep); }
 
   /* Hamburger button */
   .menubtn {

@@ -304,3 +304,32 @@ section.page {
   0%, 100% { opacity: 1; }
   50%       { opacity: 0.3; }
 }
+
+/* ── Dark mode corrections ── */
+/* --navy in dark mode = #0A0E14 (near-black). Any element using navy for
+   *text* or *border* must be overridden so it stays legible on dark bg.  */
+
+html[data-theme="dark"] .btn {
+  border-color: var(--line);
+}
+html[data-theme="dark"] .btn.solid {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--line);
+}
+html[data-theme="dark"] .btn.solid:hover {
+  background: var(--navy-2);
+}
+html[data-theme="dark"] .btn.ghost {
+  color: var(--ink);
+  border-color: var(--line);
+}
+html[data-theme="dark"] .btn.ghost:hover {
+  background: var(--surface);
+  color: var(--ink);
+}
+/* Gold btn stays correct — gold bg + dark text works in both modes */
+
+html[data-theme="dark"] .pill {
+  border-color: var(--line);
+}

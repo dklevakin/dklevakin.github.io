@@ -216,6 +216,7 @@ import BaseLayout from '../components/BaseLayout.astro';
   .hero-text { display: flex; flex-direction: column; }
 
   .hero h1 em { font-style: italic; font-weight: 300; color: var(--navy); }
+  html[data-theme="dark"] .hero h1 em { color: var(--gold); }
   .hero h1 u  {
     text-decoration: none;
     background-image: linear-gradient(transparent 60%, rgba(201,169,97,0.45) 60%);
@@ -458,6 +459,7 @@ import BaseLayout from '../components/BaseLayout.astro';
     display: inline-flex; align-items: center; gap: 6px;
     margin-top: 14px; font-size: 13px; color: var(--navy); font-weight: 500;
   }
+  html[data-theme="dark"] .more { color: var(--gold); }
   .more::after { content: "→"; transition: transform 0.15s; }
   .t-card:hover .more::after { transform: translateX(3px); }
   @media (max-width: 780px) { .teaser { grid-template-columns: 1fr; } }

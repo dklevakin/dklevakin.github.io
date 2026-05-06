@@ -20,12 +20,12 @@ import BaseLayout from '../components/BaseLayout.astro';
         <div>
           <div class="email-block">
             <div class="div-label" style="margin-bottom:0">Email</div>
-            <a class="em" href="mailto:kl.dmitri@gmail.com">kl.dmitri@gmail.com</a>
+            <a class="em" href="mailto:dlklevakin@gmail.com">dlklevakin@gmail.com</a>
             <p class="muted" style="font-size:14px">
               For quick questions LinkedIn DMs work too. For longer conversations,
               just write a paragraph and I'll suggest a time.
             </p>
-            <a class="btn gold" href="mailto:kl.dmitri@gmail.com" style="margin-top:6px">
+            <a class="btn gold" href="mailto:dlklevakin@gmail.com" style="margin-top:6px">
               Open email client →
             </a>
           </div>
@@ -39,11 +39,16 @@ import BaseLayout from '../components/BaseLayout.astro';
               </div>
               <span class="arr">↗</span>
             </a>
-            <a class="contact-card" href="tel:+380939454325">
-              <div class="cc-icon">📞</div>
+            <a class="contact-card" href="https://t.me/dklevakin" target="_blank" rel="noopener">
+              <div class="cc-icon tg-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2Z" fill="#29B6F6"/>
+                  <path d="M17.414 7.386 15.2 17.4c-.16.72-.59.895-1.196.557l-3.31-2.44-1.597 1.537c-.177.177-.325.325-.666.325l.237-3.367 6.12-5.528c.266-.237-.058-.368-.41-.131L6.33 13.463l-3.253-.988c-.707-.222-.721-.707.148-1.045L16.558 6.36c.589-.215 1.104.131.856 1.026Z" fill="white"/>
+                </svg>
+              </div>
               <div>
-                <div class="cc-label">Phone / WhatsApp</div>
-                <div class="cc-val">+380 93 945 43 25</div>
+                <div class="cc-label">Telegram</div>
+                <div class="cc-val">@dklevakin</div>
               </div>
               <span class="arr">↗</span>
             </a>
@@ -125,7 +130,7 @@ import BaseLayout from '../components/BaseLayout.astro';
     transition: border-color 0.15s, transform 0.12s;
   }
   .contact-card:hover { border-color: var(--navy); transform: translateY(-1px); }
-  .cc-icon { font-size: 20px; flex-shrink: 0; }
+  .cc-icon { font-size: 20px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; }
   .cc-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); font-weight: 500; margin-bottom: 3px; }
   .cc-val { font-family: var(--mono); font-size: 14px; color: var(--ink); font-weight: 500; }
   .contact-card .arr { margin-left: auto; color: var(--muted); font-family: var(--mono); font-size: 14px; }

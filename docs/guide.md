@@ -39,8 +39,13 @@ The dev server hot-reloads on every save. All routes (English + Ukrainian) are r
 ```
 .
 ├── public/                   ← copied as-is to dist/
-│   ├── assets/               ← canonical logos (from design system zip), photo, favicon-512
+│   ├── assets/logos/         ← canonical logos (from design system zip)
+│   ├── assets/photo.png      ← portrait
 │   ├── fonts/                ← self-hosted woff2 (Fraunces, Manrope, JetBrains Mono)
+│   ├── favicon.svg           ← favicon set lives at root of public/
+│   ├── favicon-{16,32}.png
+│   ├── apple-touch-icon.png
+│   ├── site.webmanifest
 │   ├── CNAME                 ← klevakin.com (custom domain)
 │   └── robots.txt
 ├── src/
@@ -170,6 +175,53 @@ Add new rows at the top (newest first).
 
 `src/page-content/Home.astro` — the bento is a 3-column grid. Each `<div class="card">` is a cell. Variants: `.navy` (navy bg), `.gold` (gold bg), `.span-2` (takes two columns).
 
+### Adding a track to the Music page
+
+`src/page-content/Music.astro` — the page renders from a `tracks: Track[]` array in the frontmatter. Each entry has:
+
+- `kind`: `'strudel' | 'youtube' | 'soundcloud'` — picks iframe attrs from the `kindMeta` map (height, `allow` perms, `aspect-ratio`, fullscreen)
+- `title`: displayed verbatim, no translation (proper noun)
+- `captionKey`: optional i18n key for a one-line description (e.g. `'music.carol_caption'`)
+- `url`: the iframe src
+
+```astro
+const tracks: Track[] = [
+  // Existing track:
+  { kind: 'strudel', title: 'Carol of the Bells', captionKey: 'music.carol_caption',
+    url: 'https://strudel.cc/#<base64-encoded-patch>' },
+
+  // To add a YouTube video:
+  { kind: 'youtube', title: 'Friday session #3',
+    url: 'https://www.youtube.com/embed/VIDEO_ID' },
+
+  // To add a SoundCloud track (use Share → Embed on soundcloud.com to get the URL):
+  { kind: 'soundcloud', title: 'Ambient mix 01',
+    url: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/TRACK_ID&color=%23c9a961&auto_play=false&hide_related=true&show_comments=false&show_user=true' },
+];
+```
+
+If you want a translated caption, add the key under `music` in both `en.json` and `uk.json` and reference it as `captionKey`. No CSS or layout changes needed.
+
+**On Strudel + AGPL:** the iframe approach is loose coupling under AGPL — Strudel's code runs in its own browser context, no licence propagation. Don't replace this with `@strudel/repl` (4.7 MB, AGPL-3.0-or-later, would be linked into the bundle). See **ADR-11** in [architecture.md](./architecture.md).
+
+### Hiding a page from the nav (without deleting it)
+
+`src/components/Header.astro` — comment out the relevant entry in `navLinks`:
+
+```astro
+const navLinks = [
+  { href: `${prefix}/`,         key: 'home' },
+  { href: `${prefix}/about`,    key: 'about' },
+  // { href: `${prefix}/services`, key: 'services' },  // hidden — page reachable by URL
+  { href: `${prefix}/writing`,  key: 'writing' },
+  ...
+];
+```
+
+Both desktop nav and mobile drawer pull from the same array. The page, route, sitemap entry, and i18n strings stay intact — only the nav link disappears. Re-enable by uncommenting one line.
+
+If the home page also has CTAs / teaser cards pointing to the hidden page (e.g. "See all projects" → `/projects`), comment those out in `Home.astro` too.
+
 ---
 
 ## Translating copy (i18n)
@@ -209,8 +261,22 @@ To change defaults, edit the inline init script in `BaseLayout.astro`:
 ```
 
 To adjust colours, edit `src/styles/global.css`:
+
 - Light-mode tokens live in `:root`.
 - Dark-mode overrides live in `html[data-theme="dark"]`.
+
+### Dark-mode legibility gotcha
+
+`--paper`, `--navy`, and `--ink` all flip between modes. That's correct for theme-following surfaces — but it silently breaks elements where the background is "always dark" regardless of mode.
+
+The most common bug: `background: var(--navy); color: var(--paper);` reads as cream-on-navy in light mode but becomes dark-on-dark (invisible) in dark mode, because both tokens flip to near-black.
+
+Two fix patterns (see **ADR-12** in [architecture.md](./architecture.md)):
+
+1. **Always-dark backgrounds** (footer, Services featured tier, Services CTA) — hardcode the cream colour for text: `color: #F4F1EA;`. Do not rely on `var(--paper)` in these spots.
+2. **Theme-flipping backgrounds** (default page bg, surface cards) — add a `html[data-theme="dark"]` override to swap the text token to `var(--ink)` or `var(--gold)`.
+
+Whenever you write `color: var(--paper)` or `color: var(--navy)`, ask: "is the background also theme-flipping in the same direction?" If no, you need pattern (1) or (2).
 
 ---
 
@@ -243,13 +309,19 @@ The canonical source is `colors_and_type.css` inside the design system handoff z
 
 ## Updating logos
 
-The header, footer and favicon all reference SVG files extracted from the design system zip:
-- `public/assets/logo-mark-tp.svg` — header (light theme), favicon source
-- `public/assets/logo-mark-dark.svg` — header (dark theme), favicon
-- `public/assets/logo-mark-light.svg` — footer (paper-on-navy stamp)
-- `public/assets/favicon-512.png` — apple-touch-icon
+The header and footer reference SVG files in `public/assets/logos/`. Naming convention: the `-dark` / `-light` suffix refers to the **badge background colour** (dark = navy badge, light = cream badge), not the theme it's used in.
 
-To update: re-extract from the latest zip, place in `public/assets/`, no code changes needed.
+- `public/assets/logos/logo-mark-transparent.svg` — header **light theme** (no badge — navy mark on cream paper)
+- `public/assets/logos/logo-mark-dark.svg` — header **dark theme** + footer (navy badge `#1F2A3D` blends into both dark surfaces)
+- `public/assets/logos/logo-mark-light.svg` — cream-badge variant (currently unused but available)
+- `public/assets/logos/logo-mark-{dark,light}-{512,2048}.png` — raster variants for OG / share previews
+- `public/assets/logos/logo-horizontal-{dark,light,transparent}.png` — wordmark variants
+
+The favicon set lives at `public/` root: `favicon.svg`, `favicon-{16,32}.png`, `apple-touch-icon.png`, `site.webmanifest`. Referenced from `BaseLayout.astro`.
+
+OG image fallback: `/assets/logos/logo-mark-dark-2048.png` (square — backlog OG-01 tracks the dedicated 1200×630 follow-up).
+
+To update: re-extract from the latest design-system zip into `public/assets/logos/`. No code changes needed unless filenames shift.
 
 ---
 

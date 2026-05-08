@@ -14,12 +14,13 @@ Live at **[klevakin.com](https://klevakin.com)** · mirror at [dklevakin.github.
 
 A static site built with **Astro v6** and deployed automatically to GitHub Pages from `main`.
 
-- 7 pages: Home, About, Services, Projects, Writing, Music, Contact
+- 7 pages: Home, About, Services, Projects, Writing, Music, Contact (Services + Projects currently hidden from nav, reachable by URL)
 - Markdown blog posts via Astro Content Collections (RSS + sitemap auto-generated)
 - Two languages: **English** (`/`) and **Ukrainian** (`/uk/`) — full i18n via Astro v6's built-in routing
 - **Letterpress Indigo** design system: paper `#F4F1EA`, navy `#1F2A3D`, gold `#C9A961`
 - Light + dark theme toggle (preference saved in `localStorage`)
 - Self-hosted Fraunces / Manrope / JetBrains Mono — no Google Fonts
+- **Music page** with a data-driven embed system (Strudel REPL / YouTube / SoundCloud) — first track: live-coded *Carol of the Bells*
 
 ## Tech
 
@@ -70,16 +71,18 @@ Drop a Markdown file into `src/content/posts/` named `YYYY-MM-DD-slug.md` with t
 ```
 .
 ├── public/
-│   ├── assets/            ← canonical logos (extracted from design system zip), photo, OG images
+│   ├── assets/logos/      ← canonical logos (extracted from design system zip)
+│   ├── assets/photo.png   ← portrait used by Home + About
+│   ├── favicon.svg etc.   ← favicon set at root of public/
 │   └── fonts/             ← self-hosted woff2 variable fonts
 ├── src/
-│   ├── components/        ← BaseLayout, Header, Footer, ProjectCard, ServiceCard, PostRow
+│   ├── components/        ← BaseLayout, Header, Footer, ProjectCard, PostRow
 │   ├── content/posts/     ← Markdown blog posts (Astro Content Collections)
 │   ├── i18n/              ← en.json, uk.json + t() / getLang() / altPath() helpers
 │   ├── page-content/      ← shared page bodies — one per page, takes `lang` prop
 │   ├── pages/             ← English routes (/, /about, /services, ...)
 │   ├── pages/uk/          ← Ukrainian routes (/uk, /uk/about, ...)
-│   └── styles/global.css  ← :root design tokens, base typography, blueprint grid
+│   └── styles/global.css  ← :root tokens, dark-mode overrides, blueprint grid (z-index:0 + content z-index:1)
 ├── astro.config.mjs       ← site, i18n, sitemap integration
 └── docs/                  ← architecture, backlog, guide
 ```

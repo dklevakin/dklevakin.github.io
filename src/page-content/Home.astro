@@ -28,9 +28,11 @@ const description = t(lang, 'hero.blurb');
             <a class="btn gold" href="https://calendly.com/dklevakin" target="_blank" rel="noopener">
               {t(lang, 'hero.cta_primary')} →
             </a>
+            {/* Hidden for now — secondary CTA points at /projects
             <a class="btn ghost" href={lang === 'uk' ? '/uk/projects' : '/projects'}>
               {t(lang, 'hero.cta_secondary')}
             </a>
+            */}
           </div>
 
           <!-- Trust credentials strip -->
@@ -162,14 +164,16 @@ const description = t(lang, 'hero.blurb');
           </div>
 
         </div>
+        {/* Hidden for now — "See all projects" link points at /projects
         <div style="margin-top:24px">
           <a class="btn ghost" href={lang === 'uk' ? '/uk/projects' : '/projects'}>
             {t(lang, 'cases.see_all')} →
           </a>
         </div>
+        */}
       </div>
 
-      <!-- SERVICE TEASERS -->
+      {/* SERVICE TEASERS — hidden for now; cards link to /services
       <div class="teaser-section">
         <div class="div-label">{t(lang, 'teasers.label')}</div>
         <div class="teaser">
@@ -193,6 +197,7 @@ const description = t(lang, 'hero.blurb');
           </a>
         </div>
       </div>
+      */}
 
     </div>
   </section>

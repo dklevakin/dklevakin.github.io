@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:klevakin.com)"
+      "WebFetch(domain:klevakin.com)",
+      "Bash(npm run *)",
+      "Bash(findstr /c:\"ready in\" \"C:\\\\Users\\\\dklev\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--GITHUB-dklevakin-github-io\\\\2ea02a36-9f0f-49c0-bc99-d5ec832f7f5e\\\\tasks\\\\bo77sec30.output\")"
     ]
   }
 }

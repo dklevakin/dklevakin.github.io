@@ -151,7 +151,7 @@ const { lang } = Astro.props;
   .tier.featured {
     background: var(--navy);
     border-color: var(--navy);
-    color: var(--paper);
+    color: #F4F1EA; /* fixed cream — featured bg is always dark in both modes */
     position: relative;
     transform: none;
   }
@@ -159,18 +159,20 @@ const { lang } = Astro.props;
   .tier-badge { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; color: var(--gold-deep); }
   .tier.featured .tier-badge { color: var(--gold); }
   .tier-price { font-family: var(--serif); font-size: clamp(32px, 4vw, 44px); font-weight: 400; line-height: 1; letter-spacing: -0.03em; color: var(--navy); }
-  .tier.featured .tier-price { color: var(--paper); }
+  html[data-theme="dark"] .tier-price { color: var(--ink); }
+  .tier.featured .tier-price { color: #F4F1EA; }
   .tier-title { font-family: var(--serif); font-size: 22px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.2; color: var(--ink); }
-  .tier.featured .tier-title { color: var(--paper); }
+  .tier.featured .tier-title { color: #F4F1EA; }
   .tier-desc { font-size: 14.5px; color: var(--muted); line-height: 1.55; margin: 0; }
-  .tier.featured .tier-desc { color: var(--muted-2); }
+  .tier.featured .tier-desc { color: #C9C4B6; }
   .tier-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); padding-top: 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
   .tier.featured .tier-list { border-top-color: rgba(255,255,255,0.12); }
   .tier-list li { font-size: 13.5px; color: var(--ink); display: flex; gap: 10px; align-items: baseline; line-height: 1.45; }
-  .tier.featured .tier-list li { color: var(--paper); opacity: 0.88; }
+  .tier.featured .tier-list li { color: #F4F1EA; opacity: 0.88; }
   .tier-list li::before { content: ""; flex: 0 0 6px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); transform: translateY(2px); }
-  .tier.featured .btn.ghost { border-color: rgba(255,255,255,0.25); color: var(--paper); }
+  .tier.featured .btn.ghost { border-color: rgba(255,255,255,0.25); color: #F4F1EA; }
   .tier.featured .btn.ghost:hover { background: rgba(255,255,255,0.1); }
+  /* In dark mode --navy bg becomes near-black; the cream text already handles legibility (bg darkens, text stays light) */
 
   /* Service detail cards */
   .svc { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 16px; }
@@ -183,8 +185,8 @@ const { lang } = Astro.props;
   .s ul li { font-size: 13.5px; color: var(--ink); display: flex; gap: 10px; align-items: baseline; }
   .s ul li::before { content: ""; flex: 0 0 6px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); transform: translateY(2px); }
 
-  /* CTA strip */
-  .svc-cta { margin-top: 34px; padding: 30px; background: var(--navy); color: var(--paper); border-radius: var(--r-lg); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px; }
-  .svc-cta h3 { color: var(--paper); font-family: var(--serif); font-size: 24px; font-weight: 400; margin: 0; }
-  .svc-cta p  { color: var(--muted-2); margin: 6px 0 0; font-size: 14.5px; max-width: 520px; }
+  /* CTA strip — bg is always dark navy in both themes, so use fixed cream text */
+  .svc-cta { margin-top: 34px; padding: 30px; background: var(--navy); color: #F4F1EA; border-radius: var(--r-lg); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px; }
+  .svc-cta h3 { color: #F4F1EA; font-family: var(--serif); font-size: 24px; font-weight: 400; margin: 0; }
+  .svc-cta p  { color: #C9C4B6; margin: 6px 0 0; font-size: 14.5px; max-width: 520px; }
 </style>

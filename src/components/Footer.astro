@@ -45,7 +45,9 @@ const lang = getLang(Astro.url);
   .brand-name {
     font-weight: 600;
     font-size: 14px;
-    color: var(--paper);
+    /* Footer bg is always var(--navy). In dark mode --paper flips to near-black,
+       so use a fixed cream that stays legible against the always-dark footer. */
+    color: #F4F1EA;
   }
   .brand-name .sub {
     display: block;

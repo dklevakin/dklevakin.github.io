@@ -73,7 +73,7 @@
   --code:       #ECE8DC;
 
   /* Blueprint grid overlay color */
-  --blueprint:  rgba(31, 42, 61, 0.055);
+  --blueprint:  rgba(31, 42, 61, 0.075);
 
   /* Radii */
   --r-sm:       6px;
@@ -164,18 +164,31 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── Blueprint grid background ── */
+/* ── Blueprint grid background ──
+   Fixed pseudo-element creates a parallax illusion: grid stays put while
+   content scrolls over it. Avoids `background-attachment: fixed` (iOS perf).
+   z-index:0 + content z-index:1 is safer than z-index:-1 — a transformed
+   ancestor anywhere on the page would create a stacking context that
+   captures z-index:-1 and pop the grid in front of content. */
 
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: -1;
+  z-index: 0;
   background-image:
     linear-gradient(var(--blueprint) 1px, transparent 1px),
     linear-gradient(90deg, var(--blueprint) 1px, transparent 1px);
   background-size: 48px 48px;
+}
+
+/* All real content sits above the grid. header.site already has
+   position:sticky + z-index:100, so its own rule wins; footer and main
+   inherit position:relative + z-index:1 from this rule. */
+main, header, footer {
+  position: relative;
+  z-index: 1;
 }
 
 img { max-width: 100%; display: block; }

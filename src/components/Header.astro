@@ -33,9 +33,11 @@ function isActive(href: string): boolean {
   <div class="wrap row">
     <!-- Brand / Logo -->
     <a href={homeHref} class="brand" aria-label={`${t(lang, 'meta.site_title')} — ${t(lang, 'nav.home')}`}>
-      <!-- Canonical mark from design system: D-loop with gold K -->
-      <img class="logo-light" src="/assets/logo-mark-tp.svg" alt="" width="36" height="36" />
-      <img class="logo-dark"  src="/assets/logo-mark-dark.svg" alt="" width="36" height="36" />
+      <!-- Solid Pivot mark from design system brand pack -->
+      <!-- Light theme: transparent variant (navy mark on paper bg) -->
+      <img class="logo-light" src="/assets/logos/logo-mark-transparent.svg" alt="" width="36" height="36" />
+      <!-- Dark theme: paper-badge variant pops on dark bg -->
+      <img class="logo-dark"  src="/assets/logos/logo-mark-light.svg" alt="" width="36" height="36" />
       <span class="brand-name">
         {t(lang, 'meta.site_title')}
         <span class="sub">{t(lang, 'meta.site_subtitle')}</span>

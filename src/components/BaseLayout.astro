@@ -12,7 +12,7 @@ interface Props {
   lang?:       Lang;
 }
 
-const { title, description, ogImage = '/assets/logo-dk-2048.png', lang: langProp } = Astro.props;
+const { title, description, ogImage = '/assets/logos/logo-mark-dark-2048.png', lang: langProp } = Astro.props;
 const lang: Lang = langProp ?? getLang(Astro.url);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const htmlLang = lang === 'uk' ? 'uk' : 'en';
@@ -64,9 +64,16 @@ const ukHref = new URL(altPath(Astro.url.pathname, 'uk'), Astro.site);
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image"       content={new URL(ogImage, Astro.site)} />
 
-  <!-- Favicon — canonical mark from design system -->
-  <link rel="icon" type="image/svg+xml" href="/assets/logo-mark-dark.svg" />
-  <link rel="apple-touch-icon" href="/assets/favicon-512.png" />
+  <!-- Favicon set from design system brand pack (modern → legacy → mobile) -->
+  <link rel="icon"          type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon"          type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="icon"          type="image/png" sizes="16x16" href="/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Theme color — controls browser chrome on mobile -->
+  <meta name="theme-color" content="#1F2A3D" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#F4F1EA" media="(prefers-color-scheme: light)" />
 
   <!-- RSS autodiscovery -->
   <link rel="alternate" type="application/rss+xml" title="Dmytro Klevakin" href="/rss.xml" />

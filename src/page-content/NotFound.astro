@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+import { t, type Lang } from '../i18n';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const homeHref = lang === 'uk' ? '/uk' : '/';
+const writingHref = lang === 'uk' ? '/uk/writing' : '/writing';
+---
+
+<BaseLayout
+  lang={lang}
+  title={`404 — ${t(lang, 'not_found.title')}`}
+  description={t(lang, 'not_found.lead')}
+>
+  <section class="page not-found">
+    <div class="wrap">
+      <div class="eyebrow">404</div>
+      <h1 style="margin-top:12px">{t(lang, 'not_found.title')}</h1>
+      <p class="lead muted" style="margin-top:20px">{t(lang, 'not_found.lead')}</p>
+      <div class="cta-row" style="margin-top:28px">
+        <a class="btn gold" href={homeHref}>{t(lang, 'not_found.back_home')} →</a>
+        <a class="btn ghost" href={writingHref}>{t(lang, 'nav.writing')}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found { padding-top: 80px; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+</style>

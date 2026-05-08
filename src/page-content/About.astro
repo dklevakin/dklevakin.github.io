@@ -1,0 +1,154 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+import { t, type Lang } from '../i18n';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+---
+
+<BaseLayout
+  lang={lang}
+  title={`${t(lang, 'about.label')} — ${t(lang, 'meta.site_title')}`}
+  description={t(lang, 'about.lead')}
+>
+  <section class="page">
+    <div class="wrap">
+      <div class="div-label">{t(lang, 'about.label')}</div>
+      <div class="about-grid">
+
+        <!-- LEFT: portrait + facts -->
+        <div>
+          <div class="portrait-frame">
+            <div class="portrait-inner">
+              <img class="photo" src="/assets/photo.png" alt={t(lang, 'meta.site_title')} loading="eager" />
+            </div>
+            <div class="portrait-corner-tl" aria-hidden="true"></div>
+            <div class="portrait-accent" aria-hidden="true"></div>
+          </div>
+          <div class="facts">
+            <span class="pill"><span class="dot"></span>Dnipro, Ukraine</span>
+            <span class="pill">UA · EN</span>
+            <span class="pill">13+ yrs</span>
+            <span class="pill">Azure / AWS / GCP</span>
+          </div>
+        </div>
+
+        <!-- RIGHT: bio + timeline + credentials -->
+        <div>
+          <h2>{t(lang, 'about.title')}</h2>
+          <p class="lead" style="margin-top:18px">{t(lang, 'about.lead')}</p>
+          <p class="lead voice"><em>{t(lang, 'about.voice')}</em></p>
+
+          <div class="div-label" style="margin-top:36px">{t(lang, 'about.timeline_label')}</div>
+          <div class="timeline">
+            <div class="tl-row">
+              <div class="y">2023 — now</div>
+              <div class="b">
+                <strong>Azure Solutions Lead · SoftServe</strong>
+                <span>CI/CD &amp; cloud assessments, pre-sales, Microsoft Advanced Specializations, R&amp;D for Azure / Azure DevOps.</span>
+              </div>
+            </div>
+            <div class="tl-row">
+              <div class="y">2019 — 2023</div>
+              <div class="b">
+                <strong>DevOps Architect · SoftServe</strong>
+                <span>DevOps knowledge model, operational support, leading the company-wide interviewers' community.</span>
+              </div>
+            </div>
+            <div class="tl-row">
+              <div class="y">2018 — 2019</div>
+              <div class="b">
+                <strong>IT Academy Expert · SoftServe</strong>
+                <span>Built a DevOps course from scratch and mentored students.</span>
+              </div>
+            </div>
+            <div class="tl-row">
+              <div class="y">2016 — 2019</div>
+              <div class="b">
+                <strong>Lead DevOps Engineer · SoftServe</strong>
+                <span>Managed teams up to 20 people, owned CI/CD and cloud-migration support.</span>
+              </div>
+            </div>
+            <div class="tl-row">
+              <div class="y">2012 — 2016</div>
+              <div class="b">
+                <strong>DevOps Engineer · SoftServe / FEEDGEE / Sitecore</strong>
+                <span>Deployment, CI services, release management, application monitoring.</span>
+              </div>
+            </div>
+            <div class="tl-row">
+              <div class="y">2009 — 2012</div>
+              <div class="b">
+                <strong>System / network admin · Volia, TRC Falstap</strong>
+                <span>Linux/FreeBSD, Cisco, Hyper-V, monitoring stacks.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="div-label" style="margin-top:36px">{t(lang, 'about.credentials_label')}</div>
+          <div class="cred">
+            <div class="c"><div class="l">Certification</div><b>AZ-400 — Microsoft DevOps Solutions</b></div>
+            <div class="c"><div class="l">Coaching</div><b>NLP Master Practitioner · Professional Coach · Business Trainer</b></div>
+            <div class="c"><div class="l">Education</div><b>M.Phys, Theoretical Physics — Dnipropetrovsk National University</b></div>
+            <div class="c"><div class="l">Education</div><b>M.Ed, Educational Psychology — Dnipropetrovsk National University</b></div>
+            <div class="c"><div class="l">Publication</div><b>Designing eLearning course using LMS MOODLE</b></div>
+            <div class="c"><div class="l">Languages</div><b>Ukrainian · Russian (native) · English (working)</b></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-grid { display: grid; grid-template-columns: 0.9fr 1.4fr; gap: 48px; align-items: start; }
+  @media (max-width: 780px) { .about-grid { grid-template-columns: 1fr; gap: 24px; } }
+
+  .portrait-frame { position: relative; width: 100%; max-width: 340px; }
+  .portrait-inner {
+    aspect-ratio: 4/5;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    position: relative;
+  }
+  .portrait-inner .photo {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 22%;
+  }
+  .portrait-corner-tl {
+    position: absolute; top: -8px; right: -8px;
+    width: 48px; height: 48px;
+    border-top: 3px solid var(--gold);
+    border-right: 3px solid var(--gold);
+    border-radius: 0 var(--r-md) 0 0;
+  }
+  .portrait-accent {
+    position: absolute; bottom: -10px; left: -10px;
+    width: 32px; height: 32px;
+    background: var(--navy);
+    border-radius: 6px;
+  }
+
+  .facts { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .facts .pill { font-size: 12px; padding: 6px 12px; }
+
+  .voice { color: var(--muted); font-size: 16px; margin-top: 12px; }
+  .voice em { font-style: italic; }
+
+  .timeline { display: flex; flex-direction: column; gap: 0; margin-top: 8px; }
+  .tl-row { display: grid; grid-template-columns: 120px 1fr; gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--line); align-items: start; }
+  .tl-row:last-child { border-bottom: 0; }
+  .tl-row .y { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 13px; font-weight: 500; }
+  .tl-row .b { font-size: 15px; }
+  .tl-row .b strong { display: block; font-weight: 600; margin-bottom: 2px; font-size: 15.5px; }
+  .tl-row .b span { color: var(--muted); font-size: 14px; }
+
+  .cred { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 14px; }
+  .cred .c { padding: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); font-size: 13.5px; }
+  .cred .c .l { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .cred .c b { font-weight: 600; }
+</style>

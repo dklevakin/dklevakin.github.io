@@ -1,19 +1,28 @@
 ---
 import Header from './Header.astro';
 import Footer from './Footer.astro';
+import { getLang, altPath, type Lang } from '../i18n';
 import '../styles/global.css';
 
 interface Props {
   title:       string;
   description: string;
   ogImage?:    string;
+  /** Optional override; otherwise resolved from Astro.url. */
+  lang?:       Lang;
 }
 
-const { title, description, ogImage = '/assets/og-image.png' } = Astro.props;
+const { title, description, ogImage = '/assets/logo-dk-2048.png', lang: langProp } = Astro.props;
+const lang: Lang = langProp ?? getLang(Astro.url);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const htmlLang = lang === 'uk' ? 'uk' : 'en';
+
+// Compute alt-language URLs for hreflang tags
+const enHref = new URL(altPath(Astro.url.pathname, 'en'), Astro.site);
+const ukHref = new URL(altPath(Astro.url.pathname, 'uk'), Astro.site);
 ---
 <!doctype html>
-<html lang="en">
+<html lang={htmlLang}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -34,12 +43,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalURL} />
 
+  <!-- hreflang — point search engines at both language variants -->
+  <link rel="alternate" hreflang="en" href={enHref} />
+  <link rel="alternate" hreflang="uk" href={ukHref} />
+  <link rel="alternate" hreflang="x-default" href={enHref} />
+
   <!-- Open Graph -->
   <meta property="og:type"        content="website" />
   <meta property="og:url"         content={canonicalURL} />
   <meta property="og:title"       content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:image"       content={new URL(ogImage, Astro.site)} />
+  <meta property="og:locale"      content={lang === 'uk' ? 'uk_UA' : 'en_US'} />
+  <meta property="og:locale:alternate" content={lang === 'uk' ? 'en_US' : 'uk_UA'} />
 
   <!-- Twitter / X -->
   <meta name="twitter:card"        content="summary_large_image" />
@@ -48,8 +64,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image"       content={new URL(ogImage, Astro.site)} />
 
-  <!-- Favicon — Solid Pivot logo (64×64, matching prototype) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%231F2A3D'/><circle cx='17' cy='17' r='4' fill='%23F4F1EA'/><circle cx='17' cy='32' r='4' fill='%23F4F1EA'/><circle cx='17' cy='47' r='4' fill='%23F4F1EA'/><path d='M17 17 Q36 17 37 32 Q36 47 17 47' fill='none' stroke='%23F4F1EA' stroke-width='2'/><circle cx='38' cy='32' r='6' fill='%23C9A961'/><circle cx='50' cy='17' r='4' fill='%23C9A961'/><circle cx='50' cy='47' r='4' fill='%23C9A961'/><line x1='38' y1='32' x2='50' y2='17' stroke='%23C9A961' stroke-width='2'/><line x1='38' y1='32' x2='50' y2='47' stroke='%23C9A961' stroke-width='2'/></svg>" />
+  <!-- Favicon — canonical mark from design system -->
+  <link rel="icon" type="image/svg+xml" href="/assets/logo-mark-dark.svg" />
+  <link rel="apple-touch-icon" href="/assets/favicon-512.png" />
 
   <!-- RSS autodiscovery -->
   <link rel="alternate" type="application/rss+xml" title="Dmytro Klevakin" href="/rss.xml" />

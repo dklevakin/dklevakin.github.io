@@ -1,0 +1,540 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+import { t, type Lang } from '../i18n';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+
+const title = `${t(lang, 'hero.h1_line1')} ${t(lang, 'hero.h1_line2')} — Cloud Solution Architect`;
+const description = t(lang, 'hero.blurb');
+---
+
+<BaseLayout lang={lang} title={title} description={description}>
+  <!-- HERO — two-column layout -->
+  <section class="page hero">
+    <div class="wrap">
+      <div class="hero-grid">
+
+        <!-- Left: text -->
+        <div class="hero-text">
+          <span class="eyebrow">{t(lang, 'hero.eyebrow')}</span>
+          <h1 style="margin-top:18px">{t(lang, 'hero.h1_line1')}<br/>{t(lang, 'hero.h1_line2')}</h1>
+          <p class="motto">
+            {t(lang, 'hero.motto1')} <em>{t(lang, 'hero.motto2')}</em> <u>{t(lang, 'hero.motto3')}</u>.
+          </p>
+          <p class="lead" style="margin-top:24px" set:html={t(lang, 'hero.lead_html')}></p>
+
+          <div class="cta-row" style="margin-top:28px">
+            <a class="btn gold" href="https://calendly.com/dklevakin" target="_blank" rel="noopener">
+              {t(lang, 'hero.cta_primary')} →
+            </a>
+            <a class="btn ghost" href={lang === 'uk' ? '/uk/projects' : '/projects'}>
+              {t(lang, 'hero.cta_secondary')}
+            </a>
+          </div>
+
+          <!-- Trust credentials strip -->
+          <div class="trust">
+            <div class="trust-label">{t(lang, 'hero.trust_label')}</div>
+            <div class="trust-items">
+              <span><em>✓</em> {t(lang, 'hero.trust_az400')}</span>
+              <span><em>✓</em> {t(lang, 'hero.trust_years')}</span>
+              <span><em>✓</em> {t(lang, 'hero.trust_softserve')}</span>
+              <span><em>✓</em> {t(lang, 'hero.trust_nlp')}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: portrait + site blurb -->
+        <div class="hero-portrait-wrap">
+          <div class="portrait-frame">
+            <div class="portrait-inner">
+              <img
+                class="photo"
+                src="/assets/photo.png"
+                alt={`${t(lang, 'hero.h1_line1')} ${t(lang, 'hero.h1_line2')}`}
+                loading="eager"
+              />
+              <div class="portrait-watermark" aria-hidden="true">DK</div>
+            </div>
+            <div class="portrait-corner-tl" aria-hidden="true"></div>
+            <div class="portrait-accent" aria-hidden="true"></div>
+          </div>
+
+          <!-- Site blurb card -->
+          <div class="site-blurb">
+            <div class="site-blurb-label">{t(lang, 'hero.blurb_label')}</div>
+            <p>{t(lang, 'hero.blurb')}</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- BENTO GRID — 3-column v2 prototype layout -->
+      <div class="bento" aria-label={t(lang, 'meta.site_subtitle')}>
+        <div class="card">
+          <div class="num">{t(lang, 'bento.experience_num')}</div>
+          <div class="lbl">{t(lang, 'bento.experience_lbl')}</div>
+        </div>
+        <div class="card navy">
+          <div class="num" style="font-size:48px">{t(lang, 'bento.azure_num')}</div>
+          <div class="lbl">{t(lang, 'bento.azure_lbl')}</div>
+        </div>
+        <div class="card gold">
+          <div class="num" style="font-size:48px">{t(lang, 'bento.az400_num')}</div>
+          <div class="lbl">{t(lang, 'bento.az400_lbl')}</div>
+        </div>
+
+        <div class="card span-2">
+          <div class="now-now"><span class="blink"></span>{t(lang, 'bento.now_label')}</div>
+          <p class="now-body">{t(lang, 'bento.now_body')}</p>
+        </div>
+        <div class="card">
+          <div class="num" style="font-size:34px">{t(lang, 'bento.lang_num')}</div>
+          <div class="lbl">{t(lang, 'bento.lang_lbl')}</div>
+        </div>
+      </div>
+
+      <!-- CASE STUDIES -->
+      <div class="cases-section">
+        <div class="div-label">{t(lang, 'cases.label')}</div>
+        <h2>{t(lang, 'cases.title')}</h2>
+        <div class="cases">
+
+          <div class="case">
+            <div class="case-top">
+              <span class="case-industry">{t(lang, 'cases.case1_industry')}</span>
+            </div>
+            <h3>{t(lang, 'cases.case1_title')}</h3>
+            <div class="case-metric">
+              <span class="metric-val">{t(lang, 'cases.case1_metric_val')}</span>
+              <span class="metric-lbl">{t(lang, 'cases.case1_metric_lbl')}</span>
+            </div>
+            <p>{t(lang, 'cases.case1_body')}</p>
+            <div class="case-tags">
+              <span>Azure</span><span>Bicep</span><span>Policy</span><span>FinOps</span>
+            </div>
+          </div>
+
+          <div class="case">
+            <div class="case-top">
+              <span class="case-industry">{t(lang, 'cases.case2_industry')}</span>
+            </div>
+            <h3>{t(lang, 'cases.case2_title')}</h3>
+            <div class="case-metric">
+              <span class="metric-val">{t(lang, 'cases.case2_metric_val')}</span>
+              <span class="metric-lbl">{t(lang, 'cases.case2_metric_lbl')}</span>
+            </div>
+            <p>{t(lang, 'cases.case2_body')}</p>
+            <div class="case-tags">
+              <span>GitHub Actions</span><span>Terraform</span><span>SonarQube</span>
+            </div>
+          </div>
+
+          <div class="case">
+            <div class="case-top">
+              <span class="case-industry">{t(lang, 'cases.case3_industry')}</span>
+            </div>
+            <h3>{t(lang, 'cases.case3_title')}</h3>
+            <div class="case-metric">
+              <span class="metric-val">{t(lang, 'cases.case3_metric_val')}</span>
+              <span class="metric-lbl">{t(lang, 'cases.case3_metric_lbl')}</span>
+            </div>
+            <p>{t(lang, 'cases.case3_body')}</p>
+            <div class="case-tags">
+              <span>Claude</span><span>MCP</span><span>RAG</span><span>Python</span>
+            </div>
+          </div>
+
+          <div class="case">
+            <div class="case-top">
+              <span class="case-industry">{t(lang, 'cases.case4_industry')}</span>
+            </div>
+            <h3>{t(lang, 'cases.case4_title')}</h3>
+            <div class="case-metric">
+              <span class="metric-val">{t(lang, 'cases.case4_metric_val')}</span>
+              <span class="metric-lbl">{t(lang, 'cases.case4_metric_lbl')}</span>
+            </div>
+            <p>{t(lang, 'cases.case4_body')}</p>
+            <div class="case-tags">
+              <span>Azure</span><span>AWS</span><span>FinOps</span><span>Terraform</span>
+            </div>
+          </div>
+
+        </div>
+        <div style="margin-top:24px">
+          <a class="btn ghost" href={lang === 'uk' ? '/uk/projects' : '/projects'}>
+            {t(lang, 'cases.see_all')} →
+          </a>
+        </div>
+      </div>
+
+      <!-- SERVICE TEASERS -->
+      <div class="teaser-section">
+        <div class="div-label">{t(lang, 'teasers.label')}</div>
+        <div class="teaser">
+          <a href={lang === 'uk' ? '/uk/services' : '/services'} class="t-card">
+            <div class="ico">CL</div>
+            <h3>{t(lang, 'teasers.cloud_title')}</h3>
+            <p>{t(lang, 'teasers.cloud_body')}</p>
+            <span class="more">{t(lang, 'teasers.see_more')}</span>
+          </a>
+          <a href={lang === 'uk' ? '/uk/services' : '/services'} class="t-card">
+            <div class="ico">DO</div>
+            <h3>{t(lang, 'teasers.devops_title')}</h3>
+            <p>{t(lang, 'teasers.devops_body')}</p>
+            <span class="more">{t(lang, 'teasers.see_more')}</span>
+          </a>
+          <a href={lang === 'uk' ? '/uk/services' : '/services'} class="t-card">
+            <div class="ico">AI</div>
+            <h3>{t(lang, 'teasers.ai_title')}</h3>
+            <p>{t(lang, 'teasers.ai_body')}</p>
+            <span class="more">{t(lang, 'teasers.see_more')}</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero { padding-top: 64px; padding-bottom: 24px; }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  @media (max-width: 880px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .hero-text { display: flex; flex-direction: column; }
+
+  /* v2 prototype: large two-line H1 "Dmytro / Klevakin." */
+  .hero h1 {
+    font-size: clamp(56px, 8.4vw, 108px);
+    line-height: 0.96;
+    letter-spacing: -0.035em;
+    font-weight: 400;
+  }
+
+  /* Motto: "Architecture as a lifestyle." in Fraunces */
+  .motto {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(26px, 3.4vw, 42px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 24px 0 0;
+  }
+  .motto em { font-style: italic; font-weight: 400; color: var(--navy); }
+  html[data-theme="dark"] .motto em { color: var(--gold); }
+  .motto u {
+    text-decoration: none;
+    background-image: linear-gradient(transparent 60%, color-mix(in srgb, var(--gold) 50%, transparent) 60%);
+    padding: 0 4px;
+  }
+
+  /* Lead paragraph */
+  .lead { max-width: 580px; }
+  .lead :global(strong) { font-weight: 600; color: var(--ink); }
+
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  /* Trust credentials strip — moved below CTAs as in prototype */
+  .trust {
+    margin-top: 36px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+  }
+  .trust-label {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .trust-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    font-size: 13.5px;
+    color: var(--ink);
+  }
+  .trust-items span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .trust-items em {
+    font-style: normal;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* Portrait */
+  .hero-portrait-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  @media (max-width: 880px) {
+    .hero-portrait-wrap { order: -1; }
+  }
+
+  .portrait-frame {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+  }
+  .portrait-inner {
+    aspect-ratio: 4/5;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    position: relative;
+  }
+  .portrait-inner .photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 22%;
+    z-index: 1;
+    transition: filter 0.35s ease;
+  }
+  .portrait-inner:hover .photo { filter: saturate(1.05) contrast(1.02); }
+  .portrait-watermark {
+    position: absolute;
+    right: -16px; bottom: -40px;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 200px;
+    color: var(--navy-soft);
+    letter-spacing: -0.06em;
+    line-height: 1;
+    pointer-events: none; user-select: none;
+    z-index: 0; opacity: 0.15;
+  }
+  .portrait-corner-tl {
+    position: absolute;
+    top: -8px; right: -8px;
+    width: 48px; height: 48px;
+    border-top: 3px solid var(--gold);
+    border-right: 3px solid var(--gold);
+    border-radius: 0 var(--r-md) 0 0;
+    pointer-events: none;
+  }
+  .portrait-accent {
+    position: absolute;
+    bottom: -10px; left: -10px;
+    width: 32px; height: 32px;
+    background: var(--navy);
+    border-radius: 6px;
+    pointer-events: none;
+  }
+
+  /* Site blurb card under portrait */
+  .site-blurb {
+    margin-top: 14px;
+    width: 100%;
+    max-width: 320px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 18px 20px;
+  }
+  .site-blurb-label {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .site-blurb p {
+    font-family: var(--serif);
+    font-size: 16.5px;
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--ink);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── Bento — 3-column v2 layout ── */
+  .bento {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .bento .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+  .bento .card:hover { transform: translateY(-2px); border-color: var(--navy); }
+  .bento .span-2 { grid-column: span 2; }
+  .bento .num {
+    font-family: var(--serif);
+    font-size: 48px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--navy);
+    font-weight: 400;
+  }
+  .bento .lbl {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0;
+    line-height: 1.45;
+  }
+  .bento .navy {
+    background: var(--navy);
+    color: var(--paper);
+    border-color: var(--navy);
+  }
+  .bento .navy .num { color: var(--paper); }
+  .bento .navy .lbl { color: var(--muted-2); }
+  .bento .gold {
+    background: var(--gold);
+    color: #1F2A3D;
+    border-color: var(--gold);
+  }
+  .bento .gold .num { color: #1F2A3D; }
+  .bento .gold .lbl { color: #1F2A3D; opacity: 0.78; }
+  .now-now {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold-deep); font-weight: 600;
+  }
+  .now-body {
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .blink {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold);
+    animation: blink 1.4s ease-in-out infinite;
+    display: inline-block;
+  }
+  @media (max-width: 780px) {
+    .bento { grid-template-columns: 1fr; }
+    .bento .span-2 { grid-column: span 1; }
+  }
+
+  /* ── Case studies ── */
+  .cases-section { margin-top: 96px; }
+  .cases {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 680px) { .cases { grid-template-columns: 1fr; } }
+
+  .case {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .case:hover { border-color: var(--navy); transform: translateY(-2px); }
+  .case-top { display: flex; align-items: center; }
+  .case-industry {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    font-weight: 600;
+  }
+  .case h3 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .case-metric { display: flex; align-items: baseline; gap: 8px; }
+  .metric-val {
+    font-family: var(--serif);
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--navy);
+  }
+  html[data-theme="dark"] .metric-val { color: var(--gold); }
+  .metric-lbl {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .case p { font-size: 14.5px; color: var(--muted); margin: 0; line-height: 1.55; }
+  .case-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .case-tags span {
+    font-size: 11px;
+    background: var(--code);
+    color: var(--ink);
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+
+  /* ── Service teasers ── */
+  .teaser-section { margin-top: 80px; }
+  .teaser {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .t-card {
+    padding: 26px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    transition: border-color 0.15s, transform 0.15s;
+    display: flex;
+    flex-direction: column;
+  }
+  .t-card:hover { border-color: var(--navy); transform: translateY(-2px); }
+  .t-card .ico {
+    width: 34px; height: 34px; border-radius: 8px;
+    background: var(--navy); color: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 14px; font-weight: 500;
+    margin-bottom: 14px; letter-spacing: -0.04em;
+  }
+  .t-card h3 { margin-bottom: 6px; }
+  .t-card p { color: var(--muted); font-size: 14.5px; flex: 1; }
+  .more {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 14px; font-size: 13px; color: var(--navy); font-weight: 500;
+  }
+  html[data-theme="dark"] .more { color: var(--gold); }
+  .more::after { content: "→"; transition: transform 0.15s; }
+  .t-card:hover .more::after { transform: translateX(3px); }
+  @media (max-width: 780px) { .teaser { grid-template-columns: 1fr; } }
+</style>

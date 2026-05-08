@@ -1,70 +1,62 @@
 ---
+import { getLang, altPath, t, type Lang } from '../i18n';
+
 const pathname = Astro.url.pathname;
+const lang: Lang = getLang(Astro.url);
+const otherLang: Lang = lang === 'en' ? 'uk' : 'en';
+const swapHref = altPath(pathname, otherLang);
+const homeHref = lang === 'uk' ? '/uk' : '/';
+const prefix = lang === 'uk' ? '/uk' : '';
 
 const navLinks = [
-  { href: '/',         label: 'Home' },
-  { href: '/about',    label: 'About' },
-  { href: '/services', label: 'Services' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/writing',  label: 'Writing' },
-  { href: '/music',    label: 'Music' },
-  { href: '/contact',  label: 'Contact' },
+  { href: `${prefix}/`,         key: 'home' },
+  { href: `${prefix}/about`,    key: 'about' },
+  { href: `${prefix}/services`, key: 'services' },
+  { href: `${prefix}/projects`, key: 'projects' },
+  { href: `${prefix}/writing`,  key: 'writing' },
+  { href: `${prefix}/music`,    key: 'music' },
+  { href: `${prefix}/contact`,  key: 'contact' },
 ];
 
 function isActive(href: string): boolean {
-  if (href === '/') return pathname === '/';
-  return pathname.startsWith(href);
+  // Home: only match exact root or /uk
+  if (href === '/' || href === '/uk/' || href === '/uk') {
+    return pathname === '/' || pathname === '/uk' || pathname === '/uk/';
+  }
+  // Strip trailing slash for comparison
+  const clean = href.replace(/\/$/, '');
+  return pathname === clean || pathname.startsWith(clean + '/');
 }
 ---
 
 <header class="site">
   <div class="wrap row">
     <!-- Brand / Logo -->
-    <a href="/" class="brand" aria-label="Dmytro Klevakin — Home">
-      <!-- Light mode logo: navy on transparent -->
-      <svg class="logo-light" width="36" height="36" viewBox="0 0 64 64" aria-hidden="true">
-        <circle cx="17" cy="17" r="4" fill="#1F2A3D"/>
-        <circle cx="17" cy="32" r="4" fill="#1F2A3D"/>
-        <circle cx="17" cy="47" r="4" fill="#1F2A3D"/>
-        <path d="M17 17 Q36 17 37 32 Q36 47 17 47" fill="none" stroke="#1F2A3D" stroke-width="2"/>
-        <circle cx="38" cy="32" r="6" fill="#C9A961"/>
-        <circle cx="50" cy="17" r="4" fill="#C9A961"/>
-        <circle cx="50" cy="47" r="4" fill="#C9A961"/>
-        <line x1="38" y1="32" x2="50" y2="17" stroke="#C9A961" stroke-width="2"/>
-        <line x1="38" y1="32" x2="50" y2="47" stroke="#C9A961" stroke-width="2"/>
-      </svg>
-      <!-- Dark mode logo: paper/gold on navy badge -->
-      <svg class="logo-dark" width="36" height="36" viewBox="0 0 64 64" aria-hidden="true">
-        <rect width="64" height="64" rx="14" fill="#2B3A52"/>
-        <circle cx="17" cy="17" r="4" fill="#F4F1EA"/>
-        <circle cx="17" cy="32" r="4" fill="#F4F1EA"/>
-        <circle cx="17" cy="47" r="4" fill="#F4F1EA"/>
-        <path d="M17 17 Q36 17 37 32 Q36 47 17 47" fill="none" stroke="#F4F1EA" stroke-width="2"/>
-        <circle cx="38" cy="32" r="6" fill="#C9A961"/>
-        <circle cx="50" cy="17" r="4" fill="#C9A961"/>
-        <circle cx="50" cy="47" r="4" fill="#C9A961"/>
-        <line x1="38" y1="32" x2="50" y2="17" stroke="#C9A961" stroke-width="2"/>
-        <line x1="38" y1="32" x2="50" y2="47" stroke="#C9A961" stroke-width="2"/>
-      </svg>
+    <a href={homeHref} class="brand" aria-label={`${t(lang, 'meta.site_title')} — ${t(lang, 'nav.home')}`}>
+      <!-- Canonical mark from design system: D-loop with gold K -->
+      <img class="logo-light" src="/assets/logo-mark-tp.svg" alt="" width="36" height="36" />
+      <img class="logo-dark"  src="/assets/logo-mark-dark.svg" alt="" width="36" height="36" />
       <span class="brand-name">
-        Dmytro Klevakin
-        <span class="sub">Cloud · Architecture · Music</span>
+        {t(lang, 'meta.site_title')}
+        <span class="sub">{t(lang, 'meta.site_subtitle')}</span>
       </span>
     </a>
 
     <!-- Desktop nav -->
     <nav class="primary" aria-label="Main navigation">
-      {navLinks.map(({ href, label }) => (
-        <a href={href} class={isActive(href) ? 'active' : ''}>{label}</a>
+      {navLinks.map(({ href, key }) => (
+        <a href={href} class={isActive(href) ? 'active' : ''} aria-current={isActive(href) ? 'page' : undefined}>
+          {t(lang, `nav.${key}`)}
+        </a>
       ))}
     </nav>
 
     <!-- Right controls -->
     <div class="controls">
-      <!-- Language toggle -->
-      <button class="icon-btn lang-btn" id="lang-toggle" title="Switch language" aria-label="Switch language">
-        <span class="lang-on">EN</span><span class="lang-sep">/</span><span class="lang-off">UA</span>
-      </button>
+      <!-- Language switch (anchor — navigates to alt-lang of current page) -->
+      <a class="icon-btn lang-btn" href={swapHref} title={`Switch language to ${otherLang.toUpperCase()}`} aria-label="Switch language">
+        <span class={lang === 'en' ? 'lang-on' : 'lang-off'}>EN</span><span class="lang-sep">/</span><span class={lang === 'uk' ? 'lang-on' : 'lang-off'}>UA</span>
+      </a>
 
       <!-- Theme toggle -->
       <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
@@ -74,7 +66,7 @@ function isActive(href: string): boolean {
 
       <!-- Hire me CTA -->
       <a class="hire" href="mailto:dlklevakin@gmail.com">
-        Hire me <span aria-hidden="true">→</span>
+        {t(lang, 'nav.hire')} <span aria-hidden="true">→</span>
       </a>
 
       <!-- Hamburger (mobile only) -->
@@ -91,16 +83,19 @@ function isActive(href: string): boolean {
 <div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
 <nav class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation">
   <div class="drawer-header">
-    <span class="drawer-brand">Dmytro Klevakin</span>
+    <span class="drawer-brand">{t(lang, 'meta.site_title')}</span>
     <button class="icon-btn" id="drawer-close" aria-label="Close navigation menu">✕</button>
   </div>
   <div class="drawer-links">
-    {navLinks.map(({ href, label }) => (
-      <a href={href} class={isActive(href) ? 'active' : ''}>{label}</a>
+    {navLinks.map(({ href, key }) => (
+      <a href={href} class={isActive(href) ? 'active' : ''}>{t(lang, `nav.${key}`)}</a>
     ))}
+    <a href={swapHref} class="drawer-lang">
+      <span class={lang === 'en' ? 'lang-on' : 'lang-off'}>EN</span> / <span class={lang === 'uk' ? 'lang-on' : 'lang-off'}>UA</span>
+    </a>
   </div>
   <div class="drawer-footer">
-    <a class="btn gold" href="mailto:dlklevakin@gmail.com">Hire me →</a>
+    <a class="btn gold" href="mailto:dlklevakin@gmail.com">{t(lang, 'nav.hire')} →</a>
   </div>
 </nav>
 
@@ -364,6 +359,14 @@ function isActive(href: string): boolean {
   }
   .drawer-links a:hover { background: var(--paper-2); }
   .drawer-links a.active { color: var(--navy); border-left-color: var(--gold); background: var(--paper-2); }
+  .drawer-lang {
+    margin-top: 12px;
+    border-top: 1px solid var(--line);
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
 
   .drawer-footer {
     padding: 20px 24px;

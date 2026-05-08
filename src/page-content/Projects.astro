@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { t, type Lang } from '../i18n';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+---
+
+<BaseLayout
+  lang={lang}
+  title={`${t(lang, 'projects.label')} — ${t(lang, 'meta.site_title')}`}
+  description={t(lang, 'projects.lead')}
+>
+  <section class="page">
+    <div class="wrap">
+      <div class="div-label">{t(lang, 'projects.label')}</div>
+      <h2>{t(lang, 'projects.title')}</h2>
+      <p class="lead muted" style="margin-top:14px">{t(lang, 'projects.lead')}</p>
+
+      <div class="projects" style="margin-top:32px">
+        <ProjectCard
+          featured={true}
+          repo="github.com / dklevakin / azure-landing-zones"
+          title="Azure landing-zone blueprints"
+          description="Reusable Bicep + Terraform modules for enterprise landing zones — battle-tested patterns for hub-and-spoke, identity, governance and policy-as-code."
+          stack={['Bicep', 'Terraform', 'Azure', 'Policy']}
+          href="https://github.com/dklevakin"
+        />
+        <ProjectCard
+          repo="github.com / dklevakin / claude-skills"
+          title="Claude skills for cloud teams"
+          description="Daily-use Claude Skills — file ops, doc generators, codebase Q&A."
+          stack={['Claude', 'Python', 'MCP']}
+          href="https://github.com/dklevakin"
+        />
+        <ProjectCard
+          repo="github.com / dklevakin / automation-recipes"
+          title="Boring tasks, automated"
+          description="Snippets — GitHub Actions, n8n flows, shell one-liners — that compound."
+          stack={['GitHub Actions', 'n8n', 'Bash']}
+          href="https://github.com/dklevakin"
+        />
+        <ProjectCard
+          repo="strudel.cc / patterns"
+          title="Live-coded ambient patterns"
+          description="JavaScript pattern language that runs in the browser. A few patches I made for late-night sessions."
+          stack={['Strudel', 'JavaScript', 'Music']}
+          href="https://strudel.cc"
+        />
+        <ProjectCard
+          repo="github.com / dklevakin / klevakin.com"
+          title="This site"
+          description="Astro v6 static site, hosted on GitHub Pages. Real URLs, content collections, EN/UA i18n, self-hosted fonts."
+          stack={['Astro', 'TypeScript', 'GitHub Pages']}
+          href="https://github.com/dklevakin/dklevakin.github.io"
+        />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .projects { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+  @media (max-width: 780px) { :global(.p), :global(.p.feat) { grid-column: span 6 !important; } }
+</style>

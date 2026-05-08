@@ -79,9 +79,42 @@
   --r-sm:       6px;
   --r-md:       10px;
   --r-lg:       18px;
+  --r-pill:     999px;
 
   /* Layout */
   --maxw:       1080px;
+
+  /* Type scale (clamp-based for fluid scaling) */
+  --fz-display: clamp(44px, 7vw, 88px);
+  --fz-h1:      clamp(36px, 5vw, 64px);
+  --fz-h2:      clamp(28px, 4vw, 46px);
+  --fz-h3:      20px;
+  --fz-h4:      16px;
+  --fz-body:    16px;
+  --fz-small:   14px;
+  --fz-xs:      12px;
+  --fz-eyebrow: 11px;
+
+  /* Line heights */
+  --lh-tight:   1.05;
+  --lh-snug:    1.25;
+  --lh-body:    1.6;
+
+  /* Spacing scale */
+  --sp-1:        4px;
+  --sp-2:        8px;
+  --sp-3:       12px;
+  --sp-4:       16px;
+  --sp-5:       24px;
+  --sp-6:       32px;
+  --sp-7:       48px;
+  --sp-8:       64px;
+  --sp-9:       96px;
+
+  /* Shadows (rare — only floating UI; hairline borders are primary) */
+  --shadow-sm:  0 1px 2px rgba(20, 24, 31, 0.04);
+  --shadow-md:  0 6px 24px -8px rgba(20, 24, 31, 0.12);
+  --shadow-lg:  0 20px 48px -16px rgba(20, 24, 31, 0.18);
 
   /* Typefaces */
   --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
@@ -113,7 +146,7 @@ html[data-theme="dark"] {
   --line:       #232934;
   --code:       #1A1F28;
 
-  --blueprint:  rgba(212, 179, 106, 0.08);
+  --blueprint:  rgba(212, 179, 106, 0.10);
 }
 
 /* ── Reset ── */

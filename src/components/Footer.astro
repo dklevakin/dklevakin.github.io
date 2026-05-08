@@ -1,30 +1,22 @@
 ---
+import { getLang, t } from '../i18n';
+
 const year = new Date().getFullYear();
+const lang = getLang(Astro.url);
 ---
 
 <footer class="site">
   <div class="wrap row">
     <div class="brand">
-      <!-- Solid Pivot — exact prototype mark with badge -->
-      <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true">
-        <rect width="64" height="64" rx="14" fill="#2B3A52"/>
-        <circle cx="17" cy="17" r="4" fill="#F4F1EA"/>
-        <circle cx="17" cy="32" r="4" fill="#F4F1EA"/>
-        <circle cx="17" cy="47" r="4" fill="#F4F1EA"/>
-        <path d="M17 17 Q36 17 37 32 Q36 47 17 47" fill="none" stroke="#F4F1EA" stroke-width="2"/>
-        <circle cx="38" cy="32" r="6" fill="#C9A961"/>
-        <circle cx="50" cy="17" r="4" fill="#C9A961"/>
-        <circle cx="50" cy="47" r="4" fill="#C9A961"/>
-        <line x1="38" y1="32" x2="50" y2="17" stroke="#C9A961" stroke-width="2"/>
-        <line x1="38" y1="32" x2="50" y2="47" stroke="#C9A961" stroke-width="2"/>
-      </svg>
+      <!-- Canonical mark — paper-badge variant pops on navy footer -->
+      <img src="/assets/logo-mark-light.svg" alt="" width="32" height="32" />
       <span class="brand-name">
-        Dmytro Klevakin
-        <span class="sub">klevakin.com</span>
+        {t(lang, 'meta.site_title')}
+        <span class="sub">{t(lang, 'footer.tagline')}</span>
       </span>
     </div>
     <div class="legal">
-      © {year} · Built quietly in Dnipro ·
+      © {year} · {t(lang, 'footer.legal')} ·
       <a href="https://github.com/dklevakin" target="_blank" rel="noopener">github.com/dklevakin</a>
     </div>
   </div>

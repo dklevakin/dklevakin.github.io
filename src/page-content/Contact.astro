@@ -88,6 +88,9 @@ const { lang } = Astro.props;
   .email-block { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 32px; }
   .em { font-family: var(--serif); font-size: clamp(18px, 2.5vw, 26px); color: var(--navy); font-weight: 400; font-style: italic; display: block; margin: 14px 0; letter-spacing: -0.01em; transition: color 0.15s; }
   .em:hover { color: var(--gold-deep); }
+  /* Dark mode: --navy becomes near-black, so swap to light --ink */
+  html[data-theme="dark"] .em { color: var(--ink); }
+  html[data-theme="dark"] .em:hover { color: var(--gold); }
 
   .contact-cards { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
   .contact-card { display: flex; align-items: center; gap: 14px; padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); transition: border-color 0.15s, transform 0.12s; }

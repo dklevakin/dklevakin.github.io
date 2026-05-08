@@ -417,6 +417,9 @@ const description = t(lang, 'hero.blurb');
   }
   .bento .gold .num { color: #1F2A3D; }
   .bento .gold .lbl { color: #1F2A3D; opacity: 0.78; }
+  /* Dark mode: --navy becomes near-black, so default and navy-variant nums need light text */
+  html[data-theme="dark"] .bento .num { color: var(--ink); }
+  html[data-theme="dark"] .bento .navy .num { color: var(--ink); }
   .now-now {
     display: flex; align-items: center; gap: 8px;
     font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;

@@ -140,8 +140,12 @@
     "label": "Музика",
     "title": "Live-coding-звуки на краю робочого тижня.",
     "lead": "Strudel REPL по п'ятницях увечері — невеликі алгоритмічні патчі, переважно ембієнт, інколи гліч. Записи на SoundCloud.",
-    "open_strudel": "Відкрити Strudel REPL",
-    "soundcloud": "Слухати на SoundCloud"
+    "soundcloud": "Слухати на SoundCloud",
+    "tracks_label": "Треки",
+    "kind_strudel": "Strudel",
+    "kind_youtube": "YouTube",
+    "kind_soundcloud": "SoundCloud",
+    "carol_caption": "Український різдвяний «Щедрик» Миколи Леонтовича (1916) — у live-coded аранжуванні з глокеншпіль-дзвоників, фортепіанного басу та euclidean-гітарного компу. Натисніть play у редакторі нижче. Зміни — лише в межах сесії; оновіть сторінку, щоб повернути оригінал."
   },
   "contact": {
     "label": "Контакти",

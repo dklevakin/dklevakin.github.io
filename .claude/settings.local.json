@@ -3,7 +3,19 @@
     "allow": [
       "WebFetch(domain:klevakin.com)",
       "Bash(npm run *)",
-      "Bash(findstr /c:\"ready in\" \"C:\\\\Users\\\\dklev\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--GITHUB-dklevakin-github-io\\\\2ea02a36-9f0f-49c0-bc99-d5ec832f7f5e\\\\tasks\\\\bo77sec30.output\")"
+      "Bash(findstr /c:\"ready in\" \"C:\\\\Users\\\\dklev\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--GITHUB-dklevakin-github-io\\\\2ea02a36-9f0f-49c0-bc99-d5ec832f7f5e\\\\tasks\\\\bo77sec30.output\")",
+      "Bash(curl -s -o nul -w \"EN /music: %{http_code}\\\\n\" http://localhost:4321/music)",
+      "Bash(curl -s -o nul -w \"UA /uk/music: %{http_code}\\\\n\" http://localhost:4321/uk/music)",
+      "Bash(curl -s http://localhost:4321/music)",
+      "Bash(findstr /C:\"Carol of the Bells\" /C:\"strudel.cc\" /C:\"track-frame\" /C:\"Tracks\")",
+      "Bash(curl -s http://localhost:4321/uk/music)",
+      "Bash(del music_en.html music_uk.html)",
+      "WebFetch(domain:strudel.cc)",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebFetch(domain:unpkg.com)",
+      "WebFetch(domain:codeberg.org)",
+      "WebFetch(domain:cdn.jsdelivr.net)",
+      "WebFetch(domain:www.jsdelivr.com)"
     ]
   }
 }
